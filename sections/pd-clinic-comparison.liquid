@@ -1,0 +1,159 @@
+<section class="pd-clinic section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-clinic__inner">
+
+      <div class="pd-clinic__left">
+        {% if section.settings.badge != blank %}
+          <span class="pd-clinic__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+        <h2 class="pd-clinic__title">{{ section.settings.title }}</h2>
+        <p class="pd-clinic__desc">{{ section.settings.description }}</p>
+        <ul class="pd-clinic__list">
+          {% for i in (1..5) %}
+            {% assign key = 'bullet_' | append: i %}
+            {% if section.settings[key] != blank %}
+              <li>{{ section.settings[key] }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        {% if section.settings.social_proof != blank %}
+          <p class="pd-clinic__social">{{ section.settings.social_proof }}</p>
+        {% endif %}
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_link }}" class="pd-clinic__btn">{{ section.settings.button_label }}</a>
+        {% endif %}
+      </div>
+
+      <div class="pd-clinic__right">
+        <div class="pd-clinic__table-wrap">
+          <table class="pd-clinic__table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="pd-clinic__th pd-clinic__th--product">
+                  {% if section.settings.product_image != blank %}
+                    <img src="{{ section.settings.product_image | image_url: width: 100 }}" alt="{{ section.settings.product_name }}" width="60" height="60">
+                  {% endif %}
+                  <span class="pd-clinic__brand-name">{{ section.settings.product_name | default: 'CELYRA' }}</span>
+                  <span class="pd-clinic__brand-sub">{{ section.settings.product_sub | default: 'One-time investment' }}</span>
+                </th>
+                <th class="pd-clinic__th pd-clinic__th--clinic">
+                  {% if section.settings.clinic_image != blank %}
+                    <img src="{{ section.settings.clinic_image | image_url: width: 100 }}" alt="Clinics" width="60" height="60" style="border-radius:50%;object-fit:cover;">
+                  {% endif %}
+                  <span class="pd-clinic__brand-name">{{ section.settings.clinic_name | default: 'Clinics' }}</span>
+                  <span class="pd-clinic__brand-sub">{{ section.settings.clinic_sub | default: 'Up to $500 per session' }}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for block in section.blocks %}
+                {% if block.type == 'row' %}
+                  <tr {{ block.shopify_attributes }}>
+                    <td class="pd-clinic__row-label">{{ block.settings.feature }}</td>
+                    <td class="pd-clinic__cell pd-clinic__cell--product">
+                      <span class="pd-clinic__check">✓</span>
+                      <span>{{ block.settings.product_value }}</span>
+                    </td>
+                    <td class="pd-clinic__cell pd-clinic__cell--clinic">
+                      <span class="pd-clinic__cross">✕</span>
+                      <span>{{ block.settings.clinic_value }}</span>
+                    </td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-clinic { background: #eef2f3; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-clinic__inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: center; }
+  .pd-clinic__badge { display: inline-block; border: 1px solid #888; border-radius: 100px; padding: 4px 14px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #555; margin-bottom: 18px; }
+  .pd-clinic__title { font-size: clamp(22px, 3vw, 36px); font-weight: 700; line-height: 1.25; color: #1a1a1a; margin: 0 0 16px; }
+  .pd-clinic__title em { color: #5a8a7a; font-style: normal; }
+  .pd-clinic__desc { font-size: 15px; color: #555; line-height: 1.6; margin: 0 0 20px; }
+  .pd-clinic__list { list-style: none; padding: 0; margin: 0 0 20px; }
+  .pd-clinic__list li { font-size: 14px; color: #333; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+  .pd-clinic__list li::before { content: '✓'; color: #5a8a7a; font-weight: 700; }
+  .pd-clinic__social { font-size: 13px; color: #555; margin: 0 0 20px; font-style: italic; }
+  .pd-clinic__btn { display: inline-block; padding: 14px 28px; background: #1a1a1a; color: #fff; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600; transition: background 0.2s; }
+  .pd-clinic__btn:hover { background: #333; }
+  .pd-clinic__table-wrap { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .pd-clinic__table { width: 100%; border-collapse: collapse; }
+  .pd-clinic__th { padding: 20px 16px; text-align: center; vertical-align: middle; }
+  .pd-clinic__th--product { background: #5a7a7a; }
+  .pd-clinic__th img { display: block; margin: 0 auto 8px; border-radius: 50%; }
+  .pd-clinic__brand-name { display: block; font-size: 13px; font-weight: 700; color: #fff; letter-spacing: 0.05em; }
+  .pd-clinic__th--clinic .pd-clinic__brand-name { color: #1a1a1a; }
+  .pd-clinic__brand-sub { display: block; font-size: 11px; color: rgba(255,255,255,0.75); }
+  .pd-clinic__th--clinic .pd-clinic__brand-sub { color: #888; }
+  .pd-clinic__row-label { padding: 14px 16px; font-size: 14px; color: #333; border-top: 1px solid #eee; }
+  .pd-clinic__cell { padding: 14px 16px; text-align: center; font-size: 13px; border-top: 1px solid #eee; }
+  .pd-clinic__cell--product { background: #f0f5f5; color: #2a5a5a; font-weight: 600; }
+  .pd-clinic__cell--clinic { color: #888; }
+  .pd-clinic__check { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #5a7a7a; color: #fff; font-size: 12px; margin-bottom: 4px; display: block; margin: 0 auto 4px; }
+  .pd-clinic__cross { display: block; width: 22px; height: 22px; border-radius: 50%; background: #1a1a1a; color: #fff; font-size: 12px; line-height: 22px; text-align: center; margin: 0 auto 4px; }
+  @media (max-width: 899px) { .pd-clinic__inner { grid-template-columns: 1fr; gap: 32px; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Clinic Comparison",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge Text", "default": "CLINIC RESULTS. HOME PRICE" },
+    { "type": "richtext", "id": "title", "label": "Heading", "default": "<p>Why pay <em>thousands</em> at clinics. When you can own the same technology at home?</p>" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Celebrities pay thousands for the same fractional RF technology at clinics. You can own it at home with unlimited treatments and total convenience." },
+    { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Unlimited treatments" },
+    { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Full privacy" },
+    { "type": "text", "id": "bullet_3", "label": "Bullet 3", "default": "Only pay once" },
+    { "type": "text", "id": "bullet_4", "label": "Bullet 4", "default": "" },
+    { "type": "text", "id": "bullet_5", "label": "Bullet 5", "default": "" },
+    { "type": "text", "id": "social_proof", "label": "Social Proof Text", "default": "Join 100,000+ customers that left the clinic behind." },
+    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Try Today Risk Free" },
+    { "type": "url", "id": "button_link", "label": "Button Link" },
+    { "type": "header", "content": "Product Column" },
+    { "type": "image_picker", "id": "product_image", "label": "Product Image" },
+    { "type": "text", "id": "product_name", "label": "Product Name", "default": "CELYRA" },
+    { "type": "text", "id": "product_sub", "label": "Product Subtext", "default": "One-time investment" },
+    { "type": "header", "content": "Clinic Column" },
+    { "type": "image_picker", "id": "clinic_image", "label": "Clinic Image" },
+    { "type": "text", "id": "clinic_name", "label": "Clinic Name", "default": "Clinics" },
+    { "type": "text", "id": "clinic_sub", "label": "Clinic Subtext", "default": "Up to $500 per session" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison Row",
+      "settings": [
+        { "type": "text", "id": "feature", "label": "Feature Label", "default": "Cost Savings" },
+        { "type": "text", "id": "product_value", "label": "Product Value", "default": "One cost, unlimited treatments" },
+        { "type": "text", "id": "clinic_value", "label": "Clinic Value", "default": "$500 per session, thousands per year" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Clinic Comparison",
+      "blocks": [
+        { "type": "row", "settings": { "feature": "Cost Savings", "product_value": "One cost, unlimited treatments", "clinic_value": "$500 per session, thousands per year" } },
+        { "type": "row", "settings": { "feature": "Convenience", "product_value": "Use anytime from home", "clinic_value": "Requires bookings and travel" } },
+        { "type": "row", "settings": { "feature": "Unlimited Access", "product_value": "Treat anywhere, unlimited times", "clinic_value": "Restricted to sessions you pay for" } },
+        { "type": "row", "settings": { "feature": "Same Technology", "product_value": "Fractional 3D RF from home", "clinic_value": "Mix of technology, pay per visit" } },
+        { "type": "row", "settings": { "feature": "Privacy & Comfort", "product_value": "Private treatments on your schedule", "clinic_value": "In-office only with no privacy" } },
+        { "type": "row", "settings": { "feature": "Long-term Value", "product_value": "Pays for itself after one session", "clinic_value": "Ongoing cost with no end in sight" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

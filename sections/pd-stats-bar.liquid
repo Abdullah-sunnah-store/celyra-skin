@@ -1,0 +1,59 @@
+<section class="pd-stats section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-stats__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'stat' %}
+          <div class="pd-stats__item" {{ block.shopify_attributes }}>
+            <span class="pd-stats__number">{{ block.settings.number }}</span>
+            <span class="pd-stats__label">{{ block.settings.label }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-stats { background: #eef4f6; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-stats__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: #dceaed; border-radius: 14px; overflow: hidden; }
+  .pd-stats__item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 20px; background: #eef4f6; border-right: 1px solid #dceaed; text-align: center; }
+  .pd-stats__item:last-child { border-right: none; }
+  .pd-stats__number { font-size: clamp(26px, 4vw, 42px); font-weight: 800; color: #1a1a1a; line-height: 1.1; }
+  .pd-stats__label { font-size: 12px; color: #666; margin-top: 6px; letter-spacing: 0.02em; }
+  @media (max-width: 749px) { .pd-stats__grid { grid-template-columns: repeat(2, 1fr); } .pd-stats__item { border-bottom: 1px solid #dceaed; } }
+  @media (max-width: 480px) { .pd-stats__grid { grid-template-columns: 1fr 1fr; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Stats Bar",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding top", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding bottom", "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number / Value", "default": "144" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Platinum Electrodes" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Stats Bar",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "144", "label": "Platinum Electrodes" } },
+        { "type": "stat", "settings": { "number": "1.5MHz", "label": "Radio Frequency" } },
+        { "type": "stat", "settings": { "number": "3D", "label": "Multi-Polar Technology" } },
+        { "type": "stat", "settings": { "number": "#1", "label": "Home RF Device" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

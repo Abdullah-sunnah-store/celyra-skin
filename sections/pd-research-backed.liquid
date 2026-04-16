@@ -1,0 +1,100 @@
+<section class="pd-research section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-research__header">
+      {% if section.settings.badge != blank %}
+        <span class="pd-research__badge">{{ section.settings.badge }}</span>
+      {% endif %}
+      <h2 class="pd-research__title">{{ section.settings.title }}</h2>
+      <p class="pd-research__sub">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="pd-research__body">
+      <div class="pd-research__study">
+        {% if section.settings.study_image != blank %}
+          <img src="{{ section.settings.study_image | image_url: width: 720 }}"
+               alt="Clinical study" loading="lazy" width="720" height="500"
+               class="pd-research__img">
+          {% if section.settings.study_label != blank %}
+            <span class="pd-research__img-label">{{ section.settings.study_label }}</span>
+          {% endif %}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'pd-research__img pd-research__img--placeholder' }}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="pd-research__stats">
+      {% for block in section.blocks %}
+        {% if block.type == 'stat' %}
+          <div class="pd-research__stat" {{ block.shopify_attributes }}>
+            <span class="pd-research__stat-num">{{ block.settings.number }}</span>
+            <span class="pd-research__stat-label">{{ block.settings.label }}</span>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.source_note != blank %}
+      <p class="pd-research__source">{{ section.settings.source_note }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .pd-research { background: #fff; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-research__header { text-align: center; margin-bottom: 40px; }
+  .pd-research__badge { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #777; border: 1px solid #ccc; border-radius: 100px; padding: 4px 14px; margin-bottom: 14px; }
+  .pd-research__title { font-size: clamp(26px, 4vw, 48px); font-weight: 800; color: #1a1a1a; margin: 0 0 10px; }
+  .pd-research__title em { color: #5a8a7a; font-style: normal; }
+  .pd-research__sub { font-size: 15px; color: #666; max-width: 520px; margin: 0 auto; }
+  .pd-research__body { max-width: 680px; margin: 0 auto 40px; }
+  .pd-research__study { position: relative; display: inline-block; width: 100%; }
+  .pd-research__img { width: 100%; height: auto; border-radius: 12px; display: block; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .pd-research__img--placeholder { aspect-ratio: 3/2; border-radius: 12px; }
+  .pd-research__img-label { position: absolute; top: 14px; right: 14px; background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 6px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .pd-research__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; max-width: 680px; margin: 0 auto 20px; border-top: 1px solid #eee; }
+  .pd-research__stat { text-align: center; padding: 28px 20px; }
+  .pd-research__stat-num { display: block; font-size: clamp(28px, 4vw, 48px); font-weight: 800; color: #1a1a1a; line-height: 1; }
+  .pd-research__stat-label { display: block; font-size: 12px; color: #888; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .pd-research__source { text-align: center; font-size: 11px; color: #aaa; max-width: 600px; margin: 0 auto; }
+  @media (max-width: 600px) { .pd-research__stats { grid-template-columns: 1fr; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Research Backed",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "CLINICAL EVIDENCE" },
+    { "type": "richtext", "id": "title", "label": "Heading", "default": "<p>Backed by <em>Research</em></p>" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Independent peer-reviewed research confirms what 100,000 users already see in their skin." },
+    { "type": "image_picker", "id": "study_image", "label": "Study / Evidence Image" },
+    { "type": "text", "id": "study_label", "label": "Image Badge Label", "default": "PEER-REVIEWED STUDY" },
+    { "type": "text", "id": "source_note", "label": "Source Note", "default": "Source: Independent clinical trial on fractional 3D collagen stimulation, published in the Journal of Cosmetic Dermatology" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Research Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number / Value", "default": "288%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Collagen increase at 3 months" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Research Backed",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "288%", "label": "Collagen increase at 3 months" } },
+        { "type": "stat", "settings": { "number": "144", "label": "Platinum 3D electrodes" } },
+        { "type": "stat", "settings": { "number": "15 min", "label": "Per treatment session" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

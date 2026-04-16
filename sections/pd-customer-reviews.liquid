@@ -1,0 +1,116 @@
+<section class="pd-rev section-{{ section.id }}-padding">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+      <h2 class="pd-rev__title">{{ section.settings.title }}</h2>
+    {% endif %}
+    <div class="pd-rev__slider-wrap">
+      <div class="pd-rev__track" id="pd-rev-track-{{ section.id }}">
+        {% for block in section.blocks %}
+          {% if block.type == 'review' %}
+            <div class="pd-rev__card" {{ block.shopify_attributes }}>
+              <div class="pd-rev__card-top">
+                {% if block.settings.photo != blank %}
+                  <img src="{{ block.settings.photo | image_url: width: 200 }}" alt="{{ block.settings.name }}" class="pd-rev__photo" width="80" height="80" loading="lazy">
+                {% else %}
+                  <div class="pd-rev__photo pd-rev__photo--empty">{{ block.settings.name | slice: 0 }}</div>
+                {% endif %}
+                <div>
+                  <div class="pd-rev__stars">★★★★★</div>
+                  <p class="pd-rev__name">{{ block.settings.name }}</p>
+                </div>
+              </div>
+              <p class="pd-rev__text">{{ block.settings.text }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <button class="pd-rev__arrow pd-rev__arrow--prev" aria-label="Previous">&#8592;</button>
+      <button class="pd-rev__arrow pd-rev__arrow--next" aria-label="Next">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-rev { background: #fff; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-rev__title { text-align: center; font-size: clamp(20px, 3vw, 32px); font-weight: 700; color: #1a1a1a; margin: 0 0 36px; }
+  .pd-rev__slider-wrap { position: relative; overflow: hidden; }
+  .pd-rev__track { display: flex; gap: 20px; transition: transform 0.4s ease; }
+  .pd-rev__card { flex: 0 0 calc(25% - 16px); min-width: 240px; background: #f8f6f3; border-radius: 12px; padding: 22px; }
+  .pd-rev__card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .pd-rev__photo { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .pd-rev__photo--empty { width: 52px; height: 52px; border-radius: 50%; background: #5a7a7a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; flex-shrink: 0; }
+  .pd-rev__stars { color: #f5a623; font-size: 14px; margin-bottom: 3px; }
+  .pd-rev__name { font-size: 13px; font-weight: 600; color: #1a1a1a; margin: 0; }
+  .pd-rev__text { font-size: 13px; color: #555; line-height: 1.6; margin: 0; }
+  .pd-rev__arrow { position: absolute; top: 50%; transform: translateY(-50%); background: #fff; border: 1px solid #ddd; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 2; transition: all 0.2s; }
+  .pd-rev__arrow:hover { background: #5a7a7a; color: #fff; border-color: #5a7a7a; }
+  .pd-rev__arrow--prev { left: 0; }
+  .pd-rev__arrow--next { right: 0; }
+  @media (max-width: 899px) { .pd-rev__card { flex: 0 0 calc(50% - 10px); } }
+  @media (max-width: 600px) { .pd-rev__card { flex: 0 0 85%; } }
+</style>
+
+<script>
+(function() {
+  var wrap = document.getElementById('pd-rev-track-{{ section.id }}');
+  if (!wrap) return;
+  var section = wrap.closest('.pd-rev__slider-wrap');
+  var prev = section.querySelector('.pd-rev__arrow--prev');
+  var next = section.querySelector('.pd-rev__arrow--next');
+  var idx = 0;
+  function getVisible() {
+    if (window.innerWidth < 600) return 1;
+    if (window.innerWidth < 900) return 2;
+    return 4;
+  }
+  function slide() {
+    var cards = wrap.querySelectorAll('.pd-rev__card');
+    var total = cards.length;
+    var vis = getVisible();
+    var max = Math.max(0, total - vis);
+    if (idx < 0) idx = 0;
+    if (idx > max) idx = max;
+    var cardW = cards[0] ? cards[0].offsetWidth + 20 : 260;
+    wrap.style.transform = 'translateX(-' + (idx * cardW) + 'px)';
+  }
+  prev.addEventListener('click', function() { idx--; slide(); });
+  next.addEventListener('click', function() { idx++; slide(); });
+  window.addEventListener('resize', function() { slide(); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "PD - Customer Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section Heading", "default": "Real Results from Real Customers" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review Card",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Customer Photo" },
+        { "type": "text", "id": "name", "label": "Customer Name", "default": "Eve N." },
+        { "type": "textarea", "id": "text", "label": "Review Text", "default": "I was really skeptical about purchasing this device, because over the years, I have..." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Customer Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Eve N.", "text": "I was really skeptical about purchasing this device, because over the years, I have tried just about everything. I am amazed at the results." } },
+        { "type": "review", "settings": { "name": "Lisa D.", "text": "I've been struggling with melasma for years, and it honestly knocked my confidence. I've tried everything and nothing worked. This device is a game-changer." } },
+        { "type": "review", "settings": { "name": "Aria L.", "text": "I don't think most people realise how important a device like this can be for someone. I was truly blown away by my results after just 3 weeks." } },
+        { "type": "review", "settings": { "name": "Ruthie M.", "text": "My face is looking remarkably smoother after only 1 month of using, I feel very confident and my husband told me I look 10 years younger." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+<section class="pd-sci section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-sci__header">
+      {% if section.settings.badge != blank %}
+        <span class="pd-sci__badge">{{ section.settings.badge }}</span>
+      {% endif %}
+      <h2 class="pd-sci__title">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="pd-sci__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'science_card' %}
+          <div class="pd-sci__card" {{ block.shopify_attributes }}>
+            <div class="pd-sci__img-wrap">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 480 }}" alt="{{ block.settings.title }}" loading="lazy" width="480" height="300">
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'pd-sci__img-placeholder' }}
+              {% endif %}
+            </div>
+            <div class="pd-sci__card-body">
+              <h3 class="pd-sci__card-title">{{ block.settings.title }}</h3>
+              <p class="pd-sci__card-text">{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-sci { background: #f5f8f9; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-sci__header { margin-bottom: 40px; }
+  .pd-sci__badge { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #777; margin-bottom: 8px; }
+  .pd-sci__title { font-size: clamp(22px, 3vw, 36px); font-weight: 800; color: #1a1a1a; margin: 0; }
+  .pd-sci__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .pd-sci__card { background: #fff; border-radius: 14px; overflow: hidden; }
+  .pd-sci__img-wrap { aspect-ratio: 16/10; overflow: hidden; background: #eee; }
+  .pd-sci__img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pd-sci__img-placeholder { width: 100%; height: 100%; display: block; }
+  .pd-sci__card-body { padding: 20px; }
+  .pd-sci__card-title { font-size: 15px; font-weight: 700; color: #1a1a1a; margin: 0 0 8px; }
+  .pd-sci__card-text { font-size: 13px; color: #666; line-height: 1.6; margin: 0; }
+  @media (max-width: 749px) { .pd-sci__grid { grid-template-columns: 1fr; } }
+  @media (max-width: 899px) and (min-width: 750px) { .pd-sci__grid { grid-template-columns: 1fr 1fr; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - The Science",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "REAL SCIENCE AHEAD" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "The Science" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "science_card",
+      "name": "Science Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card Image" },
+        { "type": "text", "id": "title", "label": "Card Title", "default": "Targeted Energy Delivery" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Fractional RF energy passes safely into the skin to target the dermis layer where your collagen and elastin is produced." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - The Science",
+      "blocks": [
+        { "type": "science_card", "settings": { "title": "Targeted Energy Delivery", "description": "Fractional RF energy passes safely into the skin to target the dermis layer where your collagen and elastin is produced." } },
+        { "type": "science_card", "settings": { "title": "Controlled Thermal Response", "description": "The thermal energy from RF causes skin proteins to denature which then causes your skin to respond by producing more." } },
+        { "type": "science_card", "settings": { "title": "Regeneration & Lasting Results", "description": "Fibroblasts produce up to 288% more Collagen Type I and III, helping improve the appearance of fine lines, scars, and skin texture." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

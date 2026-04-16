@@ -1,0 +1,125 @@
+<section class="pd-htu section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-htu__inner">
+
+      <div class="pd-htu__left">
+        <div class="pd-htu__video-wrap">
+          {% if section.settings.video_url != blank %}
+            <iframe src="{{ section.settings.video_url }}" frameborder="0"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen loading="lazy" title="How to use"></iframe>
+          {% elsif section.settings.video_image != blank %}
+            <div class="pd-htu__video-thumb">
+              <img src="{{ section.settings.video_image | image_url: width: 600 }}" alt="Video thumbnail" loading="lazy" width="600" height="800">
+              <div class="pd-htu__play-btn">
+                <svg viewBox="0 0 24 24" fill="white" width="48" height="48"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'pd-htu__placeholder' }}
+          {% endif %}
+        </div>
+        <div class="pd-htu__video-links">
+          {% if section.settings.link_1 != blank %}
+            <p class="pd-htu__link-item">— {{ section.settings.link_1 }}</p>
+          {% endif %}
+          {% if section.settings.link_2 != blank %}
+            <p class="pd-htu__link-item">— {{ section.settings.link_2 }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="pd-htu__right">
+        {% if section.settings.badge != blank %}
+          <span class="pd-htu__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+        <h2 class="pd-htu__title">{{ section.settings.title }}</h2>
+        <div class="pd-htu__steps">
+          {% assign step_blocks = section.blocks | where: "type", "step" %}
+          {% for block in step_blocks %}
+            <div class="pd-htu__step" {{ block.shopify_attributes }}>
+              {% if block.settings.step_image != blank %}
+                <div class="pd-htu__step-img">
+                  <img src="{{ block.settings.step_image | image_url: width: 300 }}" alt="{{ block.settings.step_label }}" loading="lazy" width="300" height="300">
+                </div>
+              {% else %}
+                <div class="pd-htu__step-img pd-htu__step-img--empty">{{ forloop.index }}</div>
+              {% endif %}
+              <div class="pd-htu__step-info">
+                <span class="pd-htu__step-tag">{{ block.settings.step_tag | default: 'Step ' | append: forloop.index }}</span>
+                <p class="pd-htu__step-label">{{ block.settings.step_label }}</p>
+                <p class="pd-htu__step-desc">{{ block.settings.step_desc }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-htu { background: #fff; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-htu__inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: start; }
+  .pd-htu__video-wrap { border-radius: 14px; overflow: hidden; position: relative; aspect-ratio: 3/4; background: #111; }
+  .pd-htu__video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .pd-htu__video-thumb { position: relative; width: 100%; height: 100%; }
+  .pd-htu__video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pd-htu__play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.35); cursor: pointer; }
+  .pd-htu__placeholder { width: 100%; aspect-ratio: 3/4; }
+  .pd-htu__video-links { margin-top: 16px; }
+  .pd-htu__link-item { font-size: 14px; color: #444; margin: 4px 0; }
+  .pd-htu__badge { display: inline-block; border: 1px solid #aaa; border-radius: 100px; padding: 4px 14px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #666; margin-bottom: 12px; }
+  .pd-htu__title { font-size: clamp(18px, 2.5vw, 28px); font-weight: 700; color: #1a1a1a; margin: 0 0 32px; line-height: 1.3; }
+  .pd-htu__steps { display: flex; flex-direction: column; gap: 20px; }
+  .pd-htu__step { display: grid; grid-template-columns: 100px 1fr; gap: 16px; align-items: start; }
+  .pd-htu__step-img { border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; }
+  .pd-htu__step-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pd-htu__step-img--empty { background: #eee; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; color: #bbb; }
+  .pd-htu__step-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 4px; display: block; }
+  .pd-htu__step-label { font-size: 14px; font-weight: 600; color: #1a1a1a; margin: 0 0 4px; }
+  .pd-htu__step-desc { font-size: 13px; color: #666; margin: 0; line-height: 1.5; }
+  @media (max-width: 899px) { .pd-htu__inner { grid-template-columns: 1fr; gap: 32px; } .pd-htu__video-wrap { max-width: 420px; margin: 0 auto; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - How To Use",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge" },
+    { "type": "text", "id": "title", "label": "Steps Heading", "default": "Clinic results, in 3 easy steps" },
+    { "type": "video_url", "id": "video_url", "label": "Video URL (YouTube/Vimeo)", "accept": ["youtube", "vimeo"] },
+    { "type": "image_picker", "id": "video_image", "label": "Video Thumbnail (if no video URL)" },
+    { "type": "text", "id": "link_1", "label": "Video Caption Line 1", "default": "What's included" },
+    { "type": "text", "id": "link_2", "label": "Video Caption Line 2", "default": "How to use" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "image_picker", "id": "step_image", "label": "Step Image" },
+        { "type": "text", "id": "step_tag", "label": "Tag", "default": "Prep" },
+        { "type": "text", "id": "step_label", "label": "Step Title", "default": "Cleanse and apply the serum" },
+        { "type": "textarea", "id": "step_desc", "label": "Step Description", "default": "Clean your skin and apply a thin layer of the serum to the treatment area." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - How To Use",
+      "blocks": [
+        { "type": "step", "settings": { "step_tag": "Prep", "step_label": "Cleanse and apply the serum to the skin", "step_desc": "Turn on the device and set to the on the treatment area for 30 seconds." } },
+        { "type": "step", "settings": { "step_tag": "Treat", "step_label": "Turn on and glide over the treatment area", "step_desc": "Turn on the device and set to the recommended level, glide over the treatment area." } },
+        { "type": "step", "settings": { "step_tag": "Finish", "step_label": "Add to cart for just 3–5 minutes to use", "step_desc": "Hold the device on each area for just 3 to 5 seconds and repeat across the full face." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

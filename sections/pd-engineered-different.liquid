@@ -1,0 +1,100 @@
+<section class="pd-eng section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-eng__header">
+      {% if section.settings.badge != blank %}
+        <span class="pd-eng__badge">{{ section.settings.badge }}</span>
+      {% endif %}
+      <h2 class="pd-eng__title">{{ section.settings.title }}</h2>
+      <p class="pd-eng__sub">{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="pd-eng__inner">
+
+      <div class="pd-eng__images">
+        {% if section.settings.image_1 != blank %}
+          <img src="{{ section.settings.image_1 | image_url: width: 480 }}" alt="Product" loading="lazy" class="pd-eng__img pd-eng__img--top" width="480" height="620">
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'pd-eng__img pd-eng__img--top pd-eng__img--placeholder' }}
+        {% endif %}
+        {% if section.settings.image_2 != blank %}
+          <img src="{{ section.settings.image_2 | image_url: width: 320 }}" alt="Product in use" loading="lazy" class="pd-eng__img pd-eng__img--bottom" width="320" height="320">
+        {% endif %}
+      </div>
+
+      <div class="pd-eng__features">
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' %}
+            <div class="pd-eng__feature" {{ block.shopify_attributes }}>
+              <span class="pd-eng__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <div class="pd-eng__feature-content">
+                <span class="pd-eng__feature-tag">{{ block.settings.tag }}</span>
+                <h3 class="pd-eng__feature-title">{{ block.settings.title }}</h3>
+                <p class="pd-eng__feature-desc">{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-eng { background: #fff; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-eng__header { text-align: center; margin-bottom: 48px; }
+  .pd-eng__badge { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #777; border: 1px solid #ccc; border-radius: 100px; padding: 4px 14px; margin-bottom: 14px; }
+  .pd-eng__title { font-size: clamp(26px, 4vw, 48px); font-weight: 800; color: #1a1a1a; margin: 0 0 8px; }
+  .pd-eng__title em { color: #5a8a7a; font-style: italic; }
+  .pd-eng__sub { font-size: 15px; color: #666; max-width: 500px; margin: 0 auto; }
+  .pd-eng__inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: start; }
+  .pd-eng__images { position: relative; display: flex; flex-direction: column; gap: 16px; }
+  .pd-eng__img { border-radius: 12px; display: block; width: 100%; height: auto; object-fit: cover; }
+  .pd-eng__img--placeholder { aspect-ratio: 3/4; }
+  .pd-eng__features { display: flex; flex-direction: column; gap: 32px; padding-top: 12px; }
+  .pd-eng__feature { display: flex; gap: 20px; align-items: flex-start; padding-bottom: 32px; border-bottom: 1px solid #eee; }
+  .pd-eng__feature:last-child { border-bottom: none; padding-bottom: 0; }
+  .pd-eng__num { font-size: 28px; font-weight: 800; color: #ddd; line-height: 1; flex-shrink: 0; width: 36px; }
+  .pd-eng__feature-tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #5a8a7a; font-weight: 600; display: block; margin-bottom: 4px; }
+  .pd-eng__feature-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin: 0 0 8px; }
+  .pd-eng__feature-desc { font-size: 14px; color: #666; margin: 0; line-height: 1.6; }
+  @media (max-width: 899px) { .pd-eng__inner { grid-template-columns: 1fr; gap: 32px; } .pd-eng__images { max-width: 400px; margin: 0 auto; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Engineered Different",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "WHY WE WORK" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Engineered Different." },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "The device has a 88% success rate. Not by chance, but because we understand the technology." },
+    { "type": "image_picker", "id": "image_1", "label": "Main Product Image" },
+    { "type": "image_picker", "id": "image_2", "label": "Secondary Image" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "WORLD'S FIRST" },
+        { "type": "text", "id": "title", "label": "Feature Title", "default": "3D Raised Electrodes" },
+        { "type": "richtext", "id": "description", "label": "Description", "default": "<p>The only device engineered with raised electrodes that contour into your skin, maximising surface contact and delivering multi-directional stimulation.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Engineered Different",
+      "blocks": [
+        { "type": "feature", "settings": { "tag": "WORLD'S FIRST", "title": "3D Raised Electrodes", "description": "<p>The only device engineered with raised electrodes that contour into your skin, <strong>maximising surface contact</strong> and delivering multi-directional stimulation.</p>" } },
+        { "type": "feature", "settings": { "tag": "MULTI-POLAR RADIO", "title": "Fractional Radio-Frequency", "description": "<p>More coverage and precision with no hot spots or no missed zones. The result is <strong>targeted collagen stimulation</strong>, for maximum collagen increase.</p>" } },
+        { "type": "feature", "settings": { "tag": "LASTING ADVANTAGE", "title": "Replaceable Treatment Heads", "description": "<p>The only RF device to have replaceable electrodes, ensuring your device can always run at <strong>max efficiency for years to come.</strong></p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

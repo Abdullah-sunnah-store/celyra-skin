@@ -1,0 +1,90 @@
+<section class="pd-trust section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-trust__inner">
+
+      <div class="pd-trust__hero">
+        <div class="pd-trust__hero-number">{{ section.settings.hero_number }}</div>
+        <div class="pd-trust__hero-label">{{ section.settings.hero_label }}</div>
+        {% if section.settings.hero_image != blank %}
+          <img src="{{ section.settings.hero_image | image_url: width: 400 }}" alt="{{ section.settings.hero_label }}" loading="lazy" width="400" height="300" class="pd-trust__hero-img">
+        {% endif %}
+        {% if section.settings.tagline != blank %}
+          <p class="pd-trust__tagline">{{ section.settings.tagline }}</p>
+        {% endif %}
+      </div>
+
+      <div class="pd-trust__badges">
+        {% for block in section.blocks %}
+          {% if block.type == 'badge' %}
+            <div class="pd-trust__badge" {{ block.shopify_attributes }}>
+              {% if block.settings.badge_image != blank %}
+                <img src="{{ block.settings.badge_image | image_url: width: 200 }}" alt="{{ block.settings.title }}" loading="lazy" width="80" height="80" class="pd-trust__badge-img">
+              {% endif %}
+              <div class="pd-trust__badge-info">
+                <span class="pd-trust__badge-title">{{ block.settings.title }}</span>
+                <span class="pd-trust__badge-desc">{{ block.settings.description }}</span>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-trust { background: #8aa3aa; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-trust__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .pd-trust__hero { color: #fff; }
+  .pd-trust__hero-number { font-size: clamp(40px, 7vw, 80px); font-weight: 800; line-height: 1; color: #fff; }
+  .pd-trust__hero-label { font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.9); margin-bottom: 20px; }
+  .pd-trust__hero-img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; display: block; margin-bottom: 20px; }
+  .pd-trust__tagline { font-size: 15px; color: rgba(255,255,255,0.8); font-style: italic; line-height: 1.5; margin: 0; }
+  .pd-trust__badges { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pd-trust__badge { background: rgba(255,255,255,0.15); backdrop-filter: blur(4px); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .pd-trust__badge-img { width: 52px; height: 52px; object-fit: contain; border-radius: 8px; }
+  .pd-trust__badge-title { font-size: 14px; font-weight: 700; color: #fff; display: block; }
+  .pd-trust__badge-desc { font-size: 12px; color: rgba(255,255,255,0.75); display: block; line-height: 1.4; }
+  @media (max-width: 899px) { .pd-trust__inner { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .pd-trust__badges { grid-template-columns: 1fr; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Trust Badges",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "hero_number", "label": "Hero Number", "default": "100K+" },
+    { "type": "text", "id": "hero_label", "label": "Hero Label", "default": "Customers" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero Image" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "The world's best performing skincare device" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Trust Badge",
+      "settings": [
+        { "type": "image_picker", "id": "badge_image", "label": "Badge Icon/Image" },
+        { "type": "text", "id": "title", "label": "Badge Title", "default": "150+ Clinics Worldwide" },
+        { "type": "text", "id": "description", "label": "Badge Description", "default": "Used and trusted by experts" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Trust Badges",
+      "blocks": [
+        { "type": "badge", "settings": { "title": "150+ Clinics Worldwide", "description": "Used and trusted by experts" } },
+        { "type": "badge", "settings": { "title": "98% User Satisfaction", "description": "Validated from the best clinic technology" } },
+        { "type": "badge", "settings": { "title": "24/7 Skincare Support", "description": "Our team of experts are here to help you" } },
+        { "type": "badge", "settings": { "title": "Science Backed", "description": "Supported by research, proven by results" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

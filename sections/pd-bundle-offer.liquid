@@ -1,0 +1,193 @@
+<section class="pd-bundle section-{{ section.id }}-padding">
+  {% if section.settings.banner_text != blank %}
+    <div class="pd-bundle__banner">{{ section.settings.banner_text }}</div>
+  {% endif %}
+  <div class="page-width">
+    <div class="pd-bundle__inner">
+
+      <div class="pd-bundle__products">
+        {% for block in section.blocks %}
+          {% if block.type == 'product_item' %}
+            <div class="pd-bundle__item" {{ block.shopify_attributes }}>
+              <div class="pd-bundle__item-img">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 200 }}" alt="{{ block.settings.name }}" loading="lazy" width="200" height="200">
+                {% else %}
+                  {{ 'product-2' | placeholder_svg_tag: 'pd-bundle__img-placeholder' }}
+                {% endif %}
+              </div>
+              {% if block.settings.badge != blank %}
+                <span class="pd-bundle__item-badge {% if block.settings.badge_style == 'free' %}is-free{% endif %}">{{ block.settings.badge }}</span>
+              {% endif %}
+              <p class="pd-bundle__item-name">{{ block.settings.name }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="pd-bundle__cta">
+        <div class="pd-bundle__countdown" id="pd-bundle-countdown-{{ section.id }}"
+             data-hours="{{ section.settings.countdown_hours }}"
+             data-minutes="{{ section.settings.countdown_minutes }}"
+             data-seconds="{{ section.settings.countdown_seconds }}">
+          <div class="pd-bundle__time-block">
+            <span class="pd-bundle__time-num" id="pbc-d-{{ section.id }}">00</span>
+            <span class="pd-bundle__time-label">DAYS</span>
+          </div>
+          <span class="pd-bundle__colon">:</span>
+          <div class="pd-bundle__time-block">
+            <span class="pd-bundle__time-num" id="pbc-h-{{ section.id }}">{{ section.settings.countdown_hours | prepend: '0' | slice: -2, 2 }}</span>
+            <span class="pd-bundle__time-label">HRS</span>
+          </div>
+          <span class="pd-bundle__colon">:</span>
+          <div class="pd-bundle__time-block">
+            <span class="pd-bundle__time-num" id="pbc-m-{{ section.id }}">{{ section.settings.countdown_minutes | prepend: '0' | slice: -2, 2 }}</span>
+            <span class="pd-bundle__time-label">MIN</span>
+          </div>
+          <span class="pd-bundle__colon">:</span>
+          <div class="pd-bundle__time-block">
+            <span class="pd-bundle__time-num" id="pbc-s-{{ section.id }}">{{ section.settings.countdown_seconds | prepend: '0' | slice: -2, 2 }}</span>
+            <span class="pd-bundle__time-label">SEC</span>
+          </div>
+        </div>
+
+        {% if section.settings.offer_label != blank %}
+          <p class="pd-bundle__offer-label">
+            <span class="pd-bundle__dot">●</span>
+            {{ section.settings.offer_label }}
+            {% if section.settings.offer_date != blank %}
+              <strong>{{ section.settings.offer_date }}</strong>
+            {% endif %}
+          </p>
+        {% endif %}
+
+        {% if section.settings.promo_code != blank %}
+          <div class="pd-bundle__promo">
+            <span>Extra {{ section.settings.promo_discount }} off at checkout:</span>
+            <span class="pd-bundle__code">
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5zm3.354 2.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0zM6 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+              {{ section.settings.promo_code }}
+            </span>
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="pd-bundle__btn">{{ section.settings.button_label }}</a>
+        {% endif %}
+
+        {% if section.settings.guarantee_text != blank %}
+          <p class="pd-bundle__guarantee">{{ section.settings.guarantee_text }}</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-bundle { background: #2a2e35; }
+  .pd-bundle__banner { background: #1a1d22; color: #fff; text-align: center; padding: 14px 20px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-bundle__inner { display: flex; flex-direction: column; align-items: center; gap: 36px; }
+  .pd-bundle__products { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .pd-bundle__item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .pd-bundle__item-img { width: 120px; height: 120px; background: rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .pd-bundle__item-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .pd-bundle__img-placeholder { width: 80px; height: 80px; }
+  .pd-bundle__item-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: rgba(255,255,255,0.15); color: #fff; }
+  .pd-bundle__item-badge.is-free { background: #4a7a6a; }
+  .pd-bundle__item-name { font-size: 12px; color: rgba(255,255,255,0.75); text-align: center; margin: 0; }
+  .pd-bundle__cta { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 420px; }
+  .pd-bundle__countdown { display: flex; align-items: flex-end; gap: 8px; }
+  .pd-bundle__time-block { display: flex; flex-direction: column; align-items: center; }
+  .pd-bundle__time-num { font-size: 44px; font-weight: 800; color: #fff; background: #3a3f48; padding: 8px 14px; border-radius: 8px; min-width: 64px; text-align: center; line-height: 1; }
+  .pd-bundle__time-label { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px; letter-spacing: 0.08em; }
+  .pd-bundle__colon { font-size: 36px; font-weight: 800; color: #fff; padding-bottom: 18px; }
+  .pd-bundle__offer-label { font-size: 13px; color: rgba(255,255,255,0.7); margin: 0; display: flex; align-items: center; gap: 6px; }
+  .pd-bundle__dot { color: #ff6b6b; font-size: 10px; }
+  .pd-bundle__promo { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 16px; font-size: 13px; color: rgba(255,255,255,0.8); }
+  .pd-bundle__code { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.15); padding: 5px 12px; border-radius: 6px; font-weight: 700; color: #fff; }
+  .pd-bundle__btn { display: block; width: 100%; padding: 16px; background: #fff; color: #1a1a1a; border-radius: 8px; text-align: center; font-size: 16px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+  .pd-bundle__btn:hover { background: #e8e8e8; }
+  .pd-bundle__guarantee { font-size: 12px; color: rgba(255,255,255,0.5); margin: 0; text-align: center; }
+  @media (max-width: 600px) { .pd-bundle__time-num { font-size: 32px; min-width: 52px; padding: 6px 10px; } }
+</style>
+
+<script>
+(function() {
+  var el = document.getElementById('pd-bundle-countdown-{{ section.id }}');
+  if (!el) return;
+  var h = parseInt(el.dataset.hours || 0);
+  var m = parseInt(el.dataset.minutes || 0);
+  var s = parseInt(el.dataset.seconds || 0);
+  var total = h * 3600 + m * 60 + s;
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    if (total <= 0) return;
+    total--;
+    var days = Math.floor(total / 86400);
+    var hrs = Math.floor((total % 86400) / 3600);
+    var mins = Math.floor((total % 3600) / 60);
+    var secs = total % 60;
+    var dEl = document.getElementById('pbc-d-{{ section.id }}');
+    var hEl = document.getElementById('pbc-h-{{ section.id }}');
+    var mEl = document.getElementById('pbc-m-{{ section.id }}');
+    var sEl = document.getElementById('pbc-s-{{ section.id }}');
+    if (dEl) dEl.textContent = pad(days);
+    if (hEl) hEl.textContent = pad(hrs);
+    if (mEl) mEl.textContent = pad(mins);
+    if (sEl) sEl.textContent = pad(secs);
+    setTimeout(tick, 1000);
+  }
+  setTimeout(tick, 1000);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "PD - Bundle Offer",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "banner_text", "label": "Top Banner Text", "default": "ORDER TODAY TO GET 30% OFF + RECEIVE 3 FREE GIFTS!" },
+    { "type": "header", "content": "Countdown Timer" },
+    { "type": "range", "id": "countdown_hours", "min": 0, "max": 23, "step": 1, "label": "Hours", "default": 14 },
+    { "type": "range", "id": "countdown_minutes", "min": 0, "max": 59, "step": 1, "label": "Minutes", "default": 47 },
+    { "type": "range", "id": "countdown_seconds", "min": 0, "max": 59, "step": 1, "label": "Seconds", "default": 35 },
+    { "type": "text", "id": "offer_label", "label": "Offer Label", "default": "Celebration Offer Expires" },
+    { "type": "text", "id": "offer_date", "label": "Offer Expiry Date", "default": "April 18th" },
+    { "type": "header", "content": "Promo Code" },
+    { "type": "text", "id": "promo_discount", "label": "Promo Discount Label", "default": "30% off" },
+    { "type": "text", "id": "promo_code", "label": "Promo Code", "default": "YOU30" },
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Add to Cart" },
+    { "type": "url", "id": "button_link", "label": "Button Link" },
+    { "type": "text", "id": "guarantee_text", "label": "Guarantee Text", "default": "60-day money back guarantee · Free shipping" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Bundle Product",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product Image" },
+        { "type": "text", "id": "name", "label": "Product Name", "default": "Device" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "30% OFF" },
+        { "type": "select", "id": "badge_style", "label": "Badge Style", "options": [{ "value": "default", "label": "Default" }, { "value": "free", "label": "Free (green)" }], "default": "default" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Bundle Offer",
+      "blocks": [
+        { "type": "product_item", "settings": { "name": "Celyra Device", "badge": "30% OFF", "badge_style": "default" } },
+        { "type": "product_item", "settings": { "name": "Aqualis Serum", "badge": "Free $59", "badge_style": "free" } },
+        { "type": "product_item", "settings": { "name": "Celyra Mask", "badge": "Free $40", "badge_style": "free" } },
+        { "type": "product_item", "settings": { "name": "Travel Pouch", "badge": "Free $29", "badge_style": "free" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

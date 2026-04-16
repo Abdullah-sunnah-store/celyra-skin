@@ -670,8 +670,98 @@
       }
     }
   },
+  "pd_before_after": {
+    "type": "pd-before-after-results",
+    "settings": {}
+  },
+  "pd_clinic_comparison": {
+    "type": "pd-clinic-comparison",
+    "settings": {}
+  },
+  "pd_press_logos": {
+    "type": "pd-press-logos",
+    "settings": {}
+  },
+  "pd_how_to_use": {
+    "type": "pd-how-to-use",
+    "settings": {}
+  },
+  "pd_technology": {
+    "type": "pd-technology",
+    "settings": {}
+  },
+  "pd_customer_reviews": {
+    "type": "pd-customer-reviews",
+    "settings": {}
+  },
+  "pd_engineered_different": {
+    "type": "pd-engineered-different",
+    "settings": {}
+  },
+  "pd_stats_bar": {
+    "type": "pd-stats-bar",
+    "settings": {}
+  },
+  "pd_competitor_compare": {
+    "type": "pd-competitor-compare",
+    "settings": {}
+  },
+  "pd_expert_quote": {
+    "type": "pd-expert-quote",
+    "settings": {}
+  },
+  "pd_skin_memory": {
+    "type": "pd-skin-memory",
+    "settings": {}
+  },
+  "pd_research_backed": {
+    "type": "pd-research-backed",
+    "settings": {}
+  },
+  "pd_the_science": {
+    "type": "pd-the-science",
+    "settings": {}
+  },
+  "pd_trust_badges": {
+    "type": "pd-trust-badges",
+    "settings": {}
+  },
+  "pd_confidence_stats": {
+    "type": "pd-confidence-stats",
+    "settings": {}
+  },
+  "pd_bundle_offer": {
+    "type": "pd-bundle-offer",
+    "settings": {}
+  },
+  "pd_faq": {
+    "type": "pd-faq",
+    "settings": {}
+  },
+  "pd_hero_banner": {
+    "type": "pd-hero-banner",
+    "settings": {}
+  },
   "order": [
     "main",
+    "pd_before_after",
+    "pd_clinic_comparison",
+    "pd_press_logos",
+    "pd_how_to_use",
+    "pd_technology",
+    "pd_customer_reviews",
+    "pd_engineered_different",
+    "pd_stats_bar",
+    "pd_competitor_compare",
+    "pd_expert_quote",
+    "pd_skin_memory",
+    "pd_research_backed",
+    "pd_the_science",
+    "pd_trust_badges",
+    "pd_confidence_stats",
+    "pd_bundle_offer",
+    "pd_faq",
+    "pd_hero_banner",
     "product-recommendations",
     "comparison_table_6r6gHe",
     "product_tabs_taf7tb"

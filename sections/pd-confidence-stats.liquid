@@ -1,0 +1,98 @@
+<section class="pd-conf section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-conf__inner">
+
+      <div class="pd-conf__image-col">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | image_url: width: 700 }}"
+               alt="{{ section.settings.heading }}" loading="lazy" width="700" height="560"
+               class="pd-conf__img">
+        {% else %}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'pd-conf__img pd-conf__img--placeholder' }}
+        {% endif %}
+      </div>
+
+      <div class="pd-conf__content">
+        {% if section.settings.badge != blank %}
+          <span class="pd-conf__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+        <h2 class="pd-conf__title">{{ section.settings.heading }}</h2>
+        <p class="pd-conf__sub">{{ section.settings.subheading }}</p>
+        {% if section.settings.disclaimer != blank %}
+          <p class="pd-conf__disclaimer-label">{{ section.settings.stats_heading | default: 'Not magic, just science.' }}</p>
+        {% endif %}
+        <div class="pd-conf__stats">
+          {% for block in section.blocks %}
+            {% if block.type == 'stat' %}
+              <div class="pd-conf__stat" {{ block.shopify_attributes }}>
+                <span class="pd-conf__stat-pct">{{ block.settings.percentage }}</span>
+                <span class="pd-conf__stat-text">{{ block.settings.description }}</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% if section.settings.source != blank %}
+          <p class="pd-conf__source">{{ section.settings.source }}</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-conf { background: #fff; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-conf__inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
+  .pd-conf__img { width: 100%; height: 460px; object-fit: cover; border-radius: 14px; display: block; }
+  .pd-conf__img--placeholder { aspect-ratio: 4/3; border-radius: 14px; }
+  .pd-conf__badge { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #777; border: 1px solid #ccc; border-radius: 100px; padding: 4px 14px; margin-bottom: 14px; }
+  .pd-conf__title { font-size: clamp(22px, 3vw, 36px); font-weight: 800; color: #1a1a1a; margin: 0 0 10px; line-height: 1.25; }
+  .pd-conf__sub { font-size: 14px; color: #888; margin: 0 0 24px; font-style: italic; }
+  .pd-conf__disclaimer-label { font-size: 16px; font-weight: 700; color: #1a1a1a; margin: 0 0 16px; }
+  .pd-conf__stats { display: flex; flex-direction: column; gap: 14px; }
+  .pd-conf__stat { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: #f5f8f9; border-radius: 10px; }
+  .pd-conf__stat-pct { font-size: 22px; font-weight: 800; color: #3a7a6a; flex-shrink: 0; min-width: 56px; }
+  .pd-conf__stat-text { font-size: 14px; color: #444; line-height: 1.4; }
+  .pd-conf__source { font-size: 11px; color: #aaa; margin: 16px 0 0; }
+  @media (max-width: 899px) { .pd-conf__inner { grid-template-columns: 1fr; gap: 28px; } .pd-conf__img { height: 300px; max-width: 480px; margin: 0 auto; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Confidence Stats",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "REAL RESULTS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Confidence Starts Here" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Reimagine What's Possible for Your Skin" },
+    { "type": "text", "id": "stats_heading", "label": "Stats Section Heading", "default": "Not magic, just science." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer (enable stats heading)", "default": "true" },
+    { "type": "textarea", "id": "source", "label": "Source Note", "default": "Based on an independent study conducted in 2024 by CELYRA COSMETICS on 30 people after 30 days of use, using the CELYRA Pro Device. Results may vary." },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "percentage", "label": "Percentage / Number", "default": "62%" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Said their skin looked younger and tighter" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Confidence Stats",
+      "blocks": [
+        { "type": "stat", "settings": { "percentage": "62%", "description": "Said their skin looked younger and tighter" } },
+        { "type": "stat", "settings": { "percentage": "86%", "description": "Said they noticed having clearer and more even skin" } },
+        { "type": "stat", "settings": { "percentage": "80%", "description": "Noticed smoother skin with less rough patches" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

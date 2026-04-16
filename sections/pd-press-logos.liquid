@@ -1,0 +1,66 @@
+<section class="pd-press section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-press__track">
+      {% for block in section.blocks %}
+        {% if block.type == 'logo' %}
+          <div class="pd-press__item" {{ block.shopify_attributes }}>
+            {% if block.settings.logo_image != blank %}
+              <img src="{{ block.settings.logo_image | image_url: width: 160 }}"
+                   alt="{{ block.settings.logo_alt }}"
+                   loading="lazy" width="160" height="50"
+                   class="pd-press__logo">
+            {% else %}
+              <span class="pd-press__name">{{ block.settings.logo_alt }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-press { background: #f5f7f8; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-press__track { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px 56px; }
+  .pd-press__item { display: flex; align-items: center; justify-content: center; }
+  .pd-press__logo { height: 36px; width: auto; object-fit: contain; opacity: 0.55; filter: grayscale(100%); transition: opacity 0.2s; }
+  .pd-press__logo:hover { opacity: 0.85; }
+  .pd-press__name { font-size: 16px; font-weight: 600; color: #aaa; letter-spacing: 0.04em; }
+  @media (max-width: 600px) { .pd-press__track { gap: 24px 32px; } .pd-press__logo { height: 28px; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Press & Media Logos",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "range", "id": "padding_top", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding top", "default": 28 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding bottom", "default": 28 }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "image_picker", "id": "logo_image", "label": "Logo Image" },
+        { "type": "text", "id": "logo_alt", "label": "Brand Name (alt text)", "default": "Publication" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Press & Media Logos",
+      "blocks": [
+        { "type": "logo", "settings": { "logo_alt": "eleganthoopoe" } },
+        { "type": "logo", "settings": { "logo_alt": "Inc." } },
+        { "type": "logo", "settings": { "logo_alt": "STYLE" } },
+        { "type": "logo", "settings": { "logo_alt": "Authority Magazine" } },
+        { "type": "logo", "settings": { "logo_alt": "Parade" } },
+        { "type": "logo", "settings": { "logo_alt": "Trusted Skincare" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

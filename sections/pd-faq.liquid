@@ -1,0 +1,158 @@
+<section class="pd-faq section-{{ section.id }}-padding">
+  <div class="page-width pd-faq__wrap">
+    {% if section.settings.badge != blank %}
+      <span class="pd-faq__badge">{{ section.settings.badge }}</span>
+    {% endif %}
+    <h2 class="pd-faq__title">{{ section.settings.title }}</h2>
+
+    {% assign category_blocks = section.blocks | where: "type", "category" %}
+    {% if category_blocks.size > 0 %}
+      <div class="pd-faq__tabs">
+        {% for block in category_blocks %}
+          <button class="pd-faq__tab {% if forloop.first %}is-active{% endif %}"
+                  data-faq-cat="{{ block.id }}" {{ block.shopify_attributes }}>
+            {{ block.settings.label }}
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% for cat_block in category_blocks %}
+      <div class="pd-faq__panel {% if forloop.first %}is-active{% endif %}" data-faq-panel="{{ cat_block.id }}">
+        {% assign qa_blocks = section.blocks | where: "type", "qa" %}
+        {% for qa in qa_blocks %}
+          {% if qa.settings.category == cat_block.id or category_blocks.size == 0 %}
+            <div class="pd-faq__item" {{ qa.shopify_attributes }}>
+              <button class="pd-faq__q">
+                <span>{{ qa.settings.question }}</span>
+                <span class="pd-faq__icon">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="pd-faq__a">
+                <div class="pd-faq__a-inner">{{ qa.settings.answer }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    {% if category_blocks.size == 0 %}
+      <div class="pd-faq__panel is-active">
+        {% assign qa_blocks = section.blocks | where: "type", "qa" %}
+        {% for qa in qa_blocks %}
+          <div class="pd-faq__item" {{ qa.shopify_attributes }}>
+            <button class="pd-faq__q">
+              <span>{{ qa.settings.question }}</span>
+              <span class="pd-faq__icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+              </span>
+            </button>
+            <div class="pd-faq__a">
+              <div class="pd-faq__a-inner">{{ qa.settings.answer }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<style>
+  .pd-faq { background: #fff; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-faq__wrap { max-width: 720px; margin: 0 auto; }
+  .pd-faq__badge { display: inline-block; border: 1px solid #ccc; border-radius: 100px; padding: 4px 16px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #666; margin-bottom: 14px; }
+  .pd-faq__title { font-size: clamp(24px, 4vw, 42px); font-weight: 800; color: #1a1a1a; margin: 0 0 28px; text-align: center; }
+  .pd-faq__title em { color: #5a8a7a; font-style: normal; }
+  .pd-faq__tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 32px; }
+  .pd-faq__tab { padding: 9px 20px; border: 1.5px solid #ccc; border-radius: 100px; background: #fff; cursor: pointer; font-size: 14px; color: #555; transition: all 0.2s; }
+  .pd-faq__tab.is-active { background: #5a7a7a; color: #fff; border-color: #5a7a7a; }
+  .pd-faq__panel { display: none; }
+  .pd-faq__panel.is-active { display: block; }
+  .pd-faq__item { border-bottom: 1px solid #eee; }
+  .pd-faq__q { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 18px 0; background: none; border: none; cursor: pointer; font-size: 16px; font-weight: 500; color: #1a1a1a; text-align: left; gap: 16px; }
+  .pd-faq__icon { flex-shrink: 0; color: #888; transition: transform 0.25s; }
+  .pd-faq__item.is-open .pd-faq__icon { transform: rotate(45deg); }
+  .pd-faq__a { display: none; }
+  .pd-faq__item.is-open .pd-faq__a { display: block; }
+  .pd-faq__a-inner { padding: 0 0 18px; font-size: 14px; color: #555; line-height: 1.7; }
+</style>
+
+<script>
+(function() {
+  var section = document.currentScript.closest('.pd-faq');
+  if (!section) return;
+
+  section.querySelectorAll('.pd-faq__tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var id = tab.dataset.faqCat;
+      section.querySelectorAll('.pd-faq__tab').forEach(function(t) { t.classList.remove('is-active'); });
+      section.querySelectorAll('.pd-faq__panel').forEach(function(p) { p.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      var panel = section.querySelector('[data-faq-panel="' + id + '"]');
+      if (panel) panel.classList.add('is-active');
+    });
+  });
+
+  section.querySelectorAll('.pd-faq__q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.pd-faq__item');
+      item.classList.toggle('is-open');
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "PD - FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "FAQ" },
+    { "type": "richtext", "id": "title", "label": "Heading", "default": "<p>Your questions, <em>answered</em></p>" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "FAQ Category Tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Category Label", "default": "Results" }
+      ]
+    },
+    {
+      "type": "qa",
+      "name": "Question & Answer",
+      "settings": [
+        { "type": "text", "id": "category", "label": "Category Block ID (leave blank for all tabs)", "default": "" },
+        { "type": "text", "id": "question", "label": "Question", "default": "When do I see results?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Most users start to notice improvements in skin texture and firmness within 2–4 weeks of consistent use. Significant collagen remodelling results are typically visible after 6–12 weeks.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - FAQ",
+      "blocks": [
+        { "type": "category", "settings": { "label": "Results" } },
+        { "type": "category", "settings": { "label": "Using the Device" } },
+        { "type": "category", "settings": { "label": "Safety" } },
+        { "type": "category", "settings": { "label": "Technology" } },
+        { "type": "category", "settings": { "label": "Brand" } },
+        { "type": "qa", "settings": { "question": "When do I see results?", "answer": "<p>Most users start to notice improvements in skin texture and firmness within 2–4 weeks of consistent use. Significant collagen remodelling results are typically visible after 6–12 weeks.</p>" } },
+        { "type": "qa", "settings": { "question": "What if I don't see results quickly?", "answer": "<p>Results vary depending on skin type and consistency of use. We recommend using the device as directed for at least 8 weeks before assessing full results. Our 60-day guarantee covers you if you are not satisfied.</p>" } },
+        { "type": "qa", "settings": { "question": "How many days per week?", "answer": "<p>We recommend using the device 3–5 times per week for the first 8 weeks, then 1–2 times per week for maintenance.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

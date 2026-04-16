@@ -1,0 +1,129 @@
+<section class="pd-skin section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-skin__header">
+      {% if section.settings.badge != blank %}
+        <span class="pd-skin__badge">{{ section.settings.badge }}</span>
+      {% endif %}
+      <h2 class="pd-skin__title">{{ section.settings.title }}</h2>
+      <p class="pd-skin__sub">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="pd-skin__inner">
+
+      <div class="pd-skin__diagram-col">
+        {% if section.settings.face_diagram != blank %}
+          <img src="{{ section.settings.face_diagram | image_url: width: 560 }}"
+               alt="Skin concerns diagram" loading="lazy" width="560" height="660"
+               class="pd-skin__diagram">
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'pd-skin__diagram pd-skin__diagram--placeholder' }}
+        {% endif %}
+      </div>
+
+      <div class="pd-skin__accordion">
+        {% for block in section.blocks %}
+          {% if block.type == 'concern' %}
+            <div class="pd-skin__item {% if forloop.first %}is-open{% endif %}" {{ block.shopify_attributes }}>
+              <button class="pd-skin__trigger" aria-expanded="{{ forloop.first }}">
+                <span class="pd-skin__trigger-title">{{ block.settings.title }}</span>
+                <span class="pd-skin__trigger-sub">{{ block.settings.tagline }}</span>
+                <span class="pd-skin__trigger-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="pd-skin__body">
+                <ul class="pd-skin__bullets">
+                  {% assign bullets = block.settings.bullets | split: "|" %}
+                  {% for bullet in bullets %}
+                    {% if bullet != blank %}
+                      <li>{{ bullet | strip }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-skin { background: #fff; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-skin__header { text-align: center; margin-bottom: 48px; }
+  .pd-skin__badge { display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #777; border: 1px solid #ccc; border-radius: 100px; padding: 4px 14px; margin-bottom: 14px; }
+  .pd-skin__title { font-size: clamp(22px, 3.5vw, 44px); font-weight: 800; color: #1a1a1a; margin: 0 0 8px; line-height: 1.25; }
+  .pd-skin__title em { color: #5a8a7a; font-style: normal; }
+  .pd-skin__sub { font-size: 15px; color: #666; max-width: 540px; margin: 0 auto; }
+  .pd-skin__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .pd-skin__diagram { width: 100%; height: auto; display: block; }
+  .pd-skin__diagram--placeholder { aspect-ratio: 4/5; }
+  .pd-skin__item { border-bottom: 1px solid #eee; }
+  .pd-skin__trigger { width: 100%; display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; background: none; border: none; cursor: pointer; text-align: left; }
+  .pd-skin__trigger-title { font-size: 15px; font-weight: 600; color: #1a1a1a; flex-grow: 1; }
+  .pd-skin__trigger-sub { font-size: 12px; color: #5a8a7a; font-style: italic; display: block; margin-top: 2px; flex-grow: 1; }
+  .pd-skin__trigger-icon { flex-shrink: 0; color: #888; transition: transform 0.25s; margin-top: 2px; }
+  .pd-skin__item.is-open .pd-skin__trigger-icon { transform: rotate(180deg); }
+  .pd-skin__body { display: none; padding: 0 0 16px; }
+  .pd-skin__item.is-open .pd-skin__body { display: block; }
+  .pd-skin__bullets { list-style: none; padding: 0; margin: 0; }
+  .pd-skin__bullets li { font-size: 13px; color: #555; padding: 3px 0 3px 18px; position: relative; }
+  .pd-skin__bullets li::before { content: '—'; position: absolute; left: 0; color: #5a8a7a; }
+  @media (max-width: 899px) { .pd-skin__inner { grid-template-columns: 1fr; gap: 28px; } .pd-skin__diagram { max-width: 380px; margin: 0 auto; } }
+</style>
+
+<script>
+document.querySelectorAll('.pd-skin__trigger').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = btn.closest('.pd-skin__item');
+    var isOpen = item.classList.contains('is-open');
+    item.closest('.pd-skin__accordion').querySelectorAll('.pd-skin__item').forEach(function(i) { i.classList.remove('is-open'); });
+    if (!isOpen) item.classList.add('is-open');
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "PD - Skin Memory / Concerns",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "WHAT CAN THE DEVICE DO" },
+    { "type": "richtext", "id": "title", "label": "Heading", "default": "<p>Your skin has a memory. <em>Help it remember.</em></p>" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "The device targets every visible sign of aging, from the first fine lines to deeper structural changes." },
+    { "type": "image_picker", "id": "face_diagram", "label": "Face Diagram Image" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "concern",
+      "name": "Skin Concern",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Concern Title", "default": "Anti-Aging & Skin Rejuvenation" },
+        { "type": "text", "id": "tagline", "label": "Tagline", "default": "\"I want to look like myself again.\"" },
+        { "type": "textarea", "id": "bullets", "label": "Bullets (separate with |)", "default": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Skin Memory / Concerns",
+      "blocks": [
+        { "type": "concern", "settings": { "title": "Anti-Aging & Skin Rejuvenation", "tagline": "\"I want to look like myself again.\"", "bullets": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin" } },
+        { "type": "concern", "settings": { "title": "Skin Tone & Texture", "tagline": "\"I want skin that glows without a filter.\"", "bullets": "Refines pores and smooths rough texture|Evens overall skin tone|Boosts natural radiance and luminosity" } },
+        { "type": "concern", "settings": { "title": "Pigmentation & Discoloration", "tagline": "\"I want an even, clear complexion.\"", "bullets": "Fades dark spots and hyperpigmentation|Reduces sun damage and age spots|Improves overall skin clarity" } },
+        { "type": "concern", "settings": { "title": "Sensitive Skin Concerns", "tagline": "\"I want skin that actually feels calm.\"", "bullets": "Gentle enough for sensitive skin|Soothes redness and irritation|Strengthens the skin barrier" } },
+        { "type": "concern", "settings": { "title": "Blemishes & Scarring", "tagline": "\"I'm so tired of trying to blend away my makeup.\"", "bullets": "Reduces acne scars and post-breakout marks|Smooths textural irregularities|Promotes clearer, more even skin" } },
+        { "type": "concern", "settings": { "title": "Full Face & Body Use", "tagline": "\"Head to toe confidence.\"", "bullets": "Safe and effective on face, neck, décolleté|Can be used on body areas|Versatile for multiple treatment zones" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,66 @@
+<section class="pd-expert section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-expert__inner">
+
+      <div class="pd-expert__image-col">
+        {% if section.settings.expert_photo != blank %}
+          <img src="{{ section.settings.expert_photo | image_url: width: 600 }}"
+               alt="{{ section.settings.expert_name }}" loading="lazy" width="600" height="560"
+               class="pd-expert__photo">
+        {% else %}
+          {{ 'person-1' | placeholder_svg_tag: 'pd-expert__photo pd-expert__photo--placeholder' }}
+        {% endif %}
+      </div>
+
+      <div class="pd-expert__content">
+        {% if section.settings.badge != blank %}
+          <span class="pd-expert__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+        <blockquote class="pd-expert__quote">
+          "{{ section.settings.quote }}"
+        </blockquote>
+        <div class="pd-expert__attribution">
+          <p class="pd-expert__name">{{ section.settings.expert_name }}</p>
+          <p class="pd-expert__clinic">{{ section.settings.expert_clinic }}</p>
+          {% if section.settings.expert_bio != blank %}
+            <p class="pd-expert__bio">{{ section.settings.expert_bio }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-expert { background: #c9d8db; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-expert__inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
+  .pd-expert__photo { width: 100%; height: 420px; object-fit: cover; object-position: top; border-radius: 14px; display: block; }
+  .pd-expert__photo--placeholder { aspect-ratio: 4/3; border-radius: 14px; }
+  .pd-expert__badge { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #4a6a6e; font-weight: 600; margin-bottom: 16px; }
+  .pd-expert__quote { font-size: clamp(16px, 2.2vw, 24px); font-weight: 700; color: #1a1a1a; line-height: 1.45; margin: 0 0 28px; }
+  .pd-expert__name { font-size: 15px; font-weight: 700; color: #1a1a1a; margin: 0 0 4px; }
+  .pd-expert__clinic { font-size: 13px; color: #3d6a70; margin: 0 0 10px; }
+  .pd-expert__bio { font-size: 13px; color: #555; line-height: 1.6; margin: 0; }
+  @media (max-width: 899px) { .pd-expert__inner { grid-template-columns: 1fr; gap: 28px; } .pd-expert__photo { height: 300px; max-width: 480px; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Expert Quote",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "WHAT EXPERTS THINK" },
+    { "type": "image_picker", "id": "expert_photo", "label": "Expert Photo" },
+    { "type": "textarea", "id": "quote", "label": "Quote Text", "default": "This is the only home device I have seen that truly replicates professional fractional RF. I confidently recommend it alongside in-clinic treatments." },
+    { "type": "text", "id": "expert_name", "label": "Expert Name", "default": "Dr Emily Amin" },
+    { "type": "text", "id": "expert_clinic", "label": "Clinic / Title", "default": "Elegant Hoopoe Clinic" },
+    { "type": "textarea", "id": "expert_bio", "label": "Expert Bio", "default": "Dr. Amin's clinical background spans over 9 years in advanced skin rejuvenation, with a specialisation in radiofrequency and collagen remodelling therapies." },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "presets": [{ "name": "PD - Expert Quote" }]
+}
+{% endschema %}
