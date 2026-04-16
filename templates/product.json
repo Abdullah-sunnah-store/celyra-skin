@@ -387,102 +387,658 @@
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 48
       }
+    },
+    "pd_product_overview": {
+      "type": "pd-product-overview",
+      "settings": {
+        "title": "Clinic-level RF. Done at home in 15 minutes.",
+        "description": "<p>The VEAUTY Dot uses true 3D fractional RF technology — the same used in professional clinics — to rebuild collagen from within and deliver visible, lasting results without surgery, downtime, or facial fat loss.</p>",
+        "button_label": "Add to cart",
+        "button_link": "",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_guarantee": {
+      "type": "pd-guarantee",
+      "settings": {
+        "days": "60",
+        "title": "60-Day Money-Back Guarantee",
+        "subtitle": "Results By 60 Days Or Your Money Back",
+        "details_label": "What does this mean?",
+        "details_text": "<p>We stand behind the VEAUTY Dot 100%. If you don't see visible results within 60 days of consistent use, we'll give you a full refund — no questions asked. Simply contact our team and we'll process your return promptly.</p>",
+        "stat_text": "Less than 1% of customers return their order",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
+    "pd_free_gifts": {
+      "type": "pd-free-gifts",
+      "settings": {
+        "title": "3 Free Gifts Included Worth $137!",
+        "subtitle": "",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "pd_faq_preview": {
+      "type": "pd-faq-preview",
+      "settings": {
+        "view_all_label": "View all FAQs",
+        "view_all_link": "",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "pd_before_after": {
+      "type": "pd-before-after-results",
+      "settings": {
+        "title": "What happens when you target the cause, not the surface.",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_clinic_comparison": {
+      "type": "pd-clinic-comparison",
+      "settings": {
+        "badge": "CLINIC RESULTS. HOME PRICE",
+        "title": "<p>Why pay <em>thousands</em> at clinics. When you can own the same technology at home?</p>",
+        "description": "Celebrities pay thousands for the same fractional RF technology at clinics. You can own it at home with unlimited treatments and total convenience.",
+        "bullet_1": "Unlimited treatments",
+        "bullet_2": "Full privacy",
+        "bullet_3": "Only pay once",
+        "bullet_4": "",
+        "bullet_5": "",
+        "social_proof": "Join 100,000+ customers that left the clinic behind.",
+        "button_label": "Try Today Risk Free",
+        "button_link": "",
+        "product_name": "CELYRA",
+        "product_sub": "One-time investment",
+        "clinic_name": "Clinics",
+        "clinic_sub": "Up to $500 per session",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_press_logos": {
+      "type": "pd-press-logos",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "pd_how_to_use": {
+      "type": "pd-how-to-use",
+      "blocks": {
+        "step_FxahDW": {
+          "type": "step",
+          "settings": {
+            "step_tag": "Prep",
+            "step_label": "Cleanse and apply the serum",
+            "step_desc": "Clean your skin and apply a thin layer of the serum to the treatment area."
+          }
+        },
+        "step_VmtGTn": {
+          "type": "step",
+          "settings": {
+            "step_tag": "Prep",
+            "step_label": "Cleanse and apply the serum",
+            "step_desc": "Clean your skin and apply a thin layer of the serum to the treatment area."
+          }
+        },
+        "step_6yJzjw": {
+          "type": "step",
+          "settings": {
+            "step_tag": "Prep",
+            "step_label": "Cleanse and apply the serum",
+            "step_desc": "Clean your skin and apply a thin layer of the serum to the treatment area."
+          }
+        }
+      },
+      "block_order": [
+        "step_FxahDW",
+        "step_VmtGTn",
+        "step_6yJzjw"
+      ],
+      "settings": {
+        "badge": "",
+        "title": "Clinic results, in 3 easy steps",
+        "video_url": "",
+        "link_1": "What's included",
+        "link_2": "How to use",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_technology": {
+      "type": "pd-technology",
+      "settings": {
+        "badge": "THE TECHNOLOGY",
+        "title": "<p>No facial fat loss. <em>But how?</em></p>",
+        "description": "<p>It is only possible with true multi-polar fractional technology. Our device is calibrated to only send energy into the dermis — meaning more results with no unwanted side effects.</p>",
+        "diagram_image": "shopify://shop_images/1_1_38f10505-3411-48a4-84f8-abb8bb88cbd9.webp",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_customer_reviews": {
+      "type": "pd-customer-reviews",
+      "blocks": {
+        "review_KB9f9t": {
+          "type": "review",
+          "settings": {
+            "name": "Eve N.",
+            "text": "I was really skeptical about purchasing this device, because over the years, I have..."
+          }
+        },
+        "review_jK3apG": {
+          "type": "review",
+          "settings": {
+            "name": "Eve N.",
+            "text": "I was really skeptical about purchasing this device, because over the years, I have..."
+          }
+        },
+        "review_VjbAaC": {
+          "type": "review",
+          "settings": {
+            "name": "Eve N.",
+            "text": "I was really skeptical about purchasing this device, because over the years, I have..."
+          }
+        },
+        "review_3p7TMA": {
+          "type": "review",
+          "settings": {
+            "name": "Eve N.",
+            "text": "I was really skeptical about purchasing this device, because over the years, I have..."
+          }
+        },
+        "review_MzgiVz": {
+          "type": "review",
+          "settings": {
+            "name": "Eve N.",
+            "text": "I was really skeptical about purchasing this device, because over the years, I have..."
+          }
+        },
+        "review_DY87WV": {
+          "type": "review",
+          "settings": {
+            "name": "Eve N.",
+            "text": "I was really skeptical about purchasing this device, because over the years, I have..."
+          }
+        }
+      },
+      "block_order": [
+        "review_KB9f9t",
+        "review_jK3apG",
+        "review_VjbAaC",
+        "review_3p7TMA",
+        "review_MzgiVz",
+        "review_DY87WV"
+      ],
+      "settings": {
+        "title": "Real Results from Real Customers",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_engineered_different": {
+      "type": "pd-engineered-different",
+      "blocks": {
+        "feature_KFRJBB": {
+          "type": "feature",
+          "settings": {
+            "tag": "WORLD'S FIRST",
+            "title": "3D Raised Electrodes",
+            "description": "<p>The only device engineered with raised electrodes that contour into your skin, maximising surface contact and delivering multi-directional stimulation.</p>"
+          }
+        },
+        "feature_JfrNBr": {
+          "type": "feature",
+          "settings": {
+            "tag": "WORLD'S FIRST",
+            "title": "3D Raised Electrodes",
+            "description": "<p>The only device engineered with raised electrodes that contour into your skin, maximising surface contact and delivering multi-directional stimulation.</p>"
+          }
+        },
+        "feature_rzaPdX": {
+          "type": "feature",
+          "settings": {
+            "tag": "WORLD'S FIRST",
+            "title": "3D Raised Electrodes",
+            "description": "<p>The only device engineered with raised electrodes that contour into your skin, maximising surface contact and delivering multi-directional stimulation.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_KFRJBB",
+        "feature_JfrNBr",
+        "feature_rzaPdX"
+      ],
+      "settings": {
+        "badge": "WHY WE WORK",
+        "title": "Engineered Different.",
+        "subtitle": "The device has a 88% success rate. Not by chance, but because we understand the technology.",
+        "image_1": "shopify://shop_images/1_1_38f10505-3411-48a4-84f8-abb8bb88cbd9.webp",
+        "image_2": "shopify://shop_images/1_0c1ce84c-be2e-44f3-ac94-275ffa24046d.webp",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_stats_bar": {
+      "type": "pd-stats-bar",
+      "settings": {
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "pd_competitor_compare": {
+      "type": "pd-competitor-compare",
+      "settings": {
+        "badge": "DEVICE VS",
+        "title": "See How We Compare",
+        "subtitle": "Safer & more effective than other home solutions",
+        "product_name": "Celyra Device",
+        "product_price": "$$",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_expert_quote": {
+      "type": "pd-expert-quote",
+      "settings": {
+        "badge": "WHAT EXPERTS THINK",
+        "expert_photo": "shopify://shop_images/4_e185a6eb-c938-48fd-8f48-89020d615a04.webp",
+        "quote": "This is the only home device I have seen that truly replicates professional fractional RF. I confidently recommend it alongside in-clinic treatments.",
+        "expert_name": "Dr Emily Amin",
+        "expert_clinic": "Elegant Hoopoe Clinic",
+        "expert_bio": "Dr. Amin's clinical background spans over 9 years in advanced skin rejuvenation, with a specialisation in radiofrequency and collagen remodelling therapies.",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_skin_memory": {
+      "type": "pd-skin-memory",
+      "blocks": {
+        "concern_8r3jGc": {
+          "type": "concern",
+          "settings": {
+            "title": "Anti-Aging & Skin Rejuvenation",
+            "tagline": "\"I want to look like myself again.\"",
+            "bullets": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin"
+          }
+        },
+        "concern_4eJiMN": {
+          "type": "concern",
+          "settings": {
+            "title": "Anti-Aging & Skin Rejuvenation",
+            "tagline": "\"I want to look like myself again.\"",
+            "bullets": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin"
+          }
+        },
+        "concern_9mgyGd": {
+          "type": "concern",
+          "settings": {
+            "title": "Anti-Aging & Skin Rejuvenation",
+            "tagline": "\"I want to look like myself again.\"",
+            "bullets": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin"
+          }
+        },
+        "concern_T7qMQf": {
+          "type": "concern",
+          "settings": {
+            "title": "Anti-Aging & Skin Rejuvenation",
+            "tagline": "\"I want to look like myself again.\"",
+            "bullets": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin"
+          }
+        },
+        "concern_HjY6Er": {
+          "type": "concern",
+          "settings": {
+            "title": "Anti-Aging & Skin Rejuvenation",
+            "tagline": "\"I want to look like myself again.\"",
+            "bullets": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin"
+          }
+        },
+        "concern_nyQJhQ": {
+          "type": "concern",
+          "settings": {
+            "title": "Anti-Aging & Skin Rejuvenation",
+            "tagline": "\"I want to look like myself again.\"",
+            "bullets": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin"
+          }
+        },
+        "concern_VHd7xf": {
+          "type": "concern",
+          "settings": {
+            "title": "Anti-Aging & Skin Rejuvenation",
+            "tagline": "\"I want to look like myself again.\"",
+            "bullets": "Tightens and lifts skin without surgery or downtime|Stimulates collagen and elastin production|Reduces fine lines and wrinkles|Improves firmness and elasticity|Defines facial contours — jawline, cheeks, chin"
+          }
+        }
+      },
+      "block_order": [
+        "concern_8r3jGc",
+        "concern_4eJiMN",
+        "concern_9mgyGd",
+        "concern_T7qMQf",
+        "concern_HjY6Er",
+        "concern_nyQJhQ",
+        "concern_VHd7xf"
+      ],
+      "settings": {
+        "badge": "WHAT CAN THE DEVICE DO",
+        "title": "<p>Your skin has a memory. <em>Help it remember.</em></p>",
+        "subtitle": "The device targets every visible sign of aging, from the first fine lines to deeper structural changes.",
+        "face_diagram": "shopify://shop_images/5_a5e55ee4-1fb3-4d87-b3bc-177bda9c861a.webp",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_research_backed": {
+      "type": "pd-research-backed",
+      "blocks": {
+        "stat_MKzzjw": {
+          "type": "stat",
+          "settings": {
+            "number": "288%",
+            "label": "Collagen increase at 3 months"
+          }
+        },
+        "stat_fEcn4G": {
+          "type": "stat",
+          "settings": {
+            "number": "144",
+            "label": "Platinum 3D electrodes"
+          }
+        },
+        "stat_aGzyB3": {
+          "type": "stat",
+          "settings": {
+            "number": "15 min",
+            "label": "Per treatment session"
+          }
+        }
+      },
+      "block_order": [
+        "stat_MKzzjw",
+        "stat_fEcn4G",
+        "stat_aGzyB3"
+      ],
+      "settings": {
+        "badge": "CLINICAL EVIDENCE",
+        "title": "<p>Backed by <em>Research</em></p>",
+        "subtitle": "Independent peer-reviewed research confirms what 100,000 users already see in their skin.",
+        "study_image": "shopify://shop_images/5_af8fc286-e4cd-40ab-b56b-3157bb9caa16.webp",
+        "study_label": "PEER-REVIEWED STUDY",
+        "source_note": "Source: Independent clinical trial on fractional 3D collagen stimulation, published in the Journal of Cosmetic Dermatology",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_the_science": {
+      "type": "pd-the-science",
+      "blocks": {
+        "science_card_cBqck7": {
+          "type": "science_card",
+          "settings": {
+            "title": "Targeted Energy Delivery",
+            "description": "Fractional RF energy passes safely into the skin to target the dermis layer where your collagen and elastin is produced."
+          }
+        },
+        "science_card_YHfb6n": {
+          "type": "science_card",
+          "settings": {
+            "title": "Targeted Energy Delivery",
+            "description": "Fractional RF energy passes safely into the skin to target the dermis layer where your collagen and elastin is produced."
+          }
+        },
+        "science_card_mVLKwU": {
+          "type": "science_card",
+          "settings": {
+            "title": "Targeted Energy Delivery",
+            "description": "Fractional RF energy passes safely into the skin to target the dermis layer where your collagen and elastin is produced."
+          }
+        }
+      },
+      "block_order": [
+        "science_card_cBqck7",
+        "science_card_YHfb6n",
+        "science_card_mVLKwU"
+      ],
+      "settings": {
+        "badge": "REAL SCIENCE AHEAD",
+        "title": "The Science",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_trust_badges": {
+      "type": "pd-trust-badges",
+      "blocks": {
+        "badge_TbYcEp": {
+          "type": "badge",
+          "settings": {
+            "badge_image": "shopify://shop_images/11_d0bb619e-b618-49ac-9ab4-a7b1fdcf8bdc.webp",
+            "title": "150+ Clinics Worldwide",
+            "description": "Used and trusted by experts"
+          }
+        },
+        "badge_69MmNN": {
+          "type": "badge",
+          "settings": {
+            "badge_image": "shopify://shop_images/8_745a4fbf-f7a0-4962-8036-6f55a4322bd0.webp",
+            "title": "150+ Clinics Worldwide",
+            "description": "Used and trusted by experts"
+          }
+        },
+        "badge_6jtJQz": {
+          "type": "badge",
+          "settings": {
+            "title": "150+ Clinics Worldwide",
+            "description": "Used and trusted by experts"
+          }
+        },
+        "badge_cdFn6m": {
+          "type": "badge",
+          "settings": {
+            "title": "150+ Clinics Worldwide",
+            "description": "Used and trusted by experts"
+          }
+        },
+        "badge_HRkzbR": {
+          "type": "badge",
+          "settings": {
+            "title": "150+ Clinics Worldwide",
+            "description": "Used and trusted by experts"
+          }
+        }
+      },
+      "block_order": [
+        "badge_TbYcEp",
+        "badge_69MmNN",
+        "badge_6jtJQz",
+        "badge_cdFn6m",
+        "badge_HRkzbR"
+      ],
+      "settings": {
+        "hero_number": "100K+",
+        "hero_label": "Customers",
+        "tagline": "The world's best performing skincare device",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_confidence_stats": {
+      "type": "pd-confidence-stats",
+      "blocks": {
+        "stat_7V9iWU": {
+          "type": "stat",
+          "settings": {
+            "percentage": "62%",
+            "description": "Said their skin looked younger and tighter"
+          }
+        },
+        "stat_RUjCxy": {
+          "type": "stat",
+          "settings": {
+            "percentage": "62%",
+            "description": "Said their skin looked younger and tighter"
+          }
+        },
+        "stat_pUMTVW": {
+          "type": "stat",
+          "settings": {
+            "percentage": "62%",
+            "description": "Said their skin looked younger and tighter"
+          }
+        },
+        "stat_jNwL6r": {
+          "type": "stat",
+          "settings": {
+            "percentage": "62%",
+            "description": "Said their skin looked younger and tighter"
+          }
+        }
+      },
+      "block_order": [
+        "stat_7V9iWU",
+        "stat_RUjCxy",
+        "stat_pUMTVW",
+        "stat_jNwL6r"
+      ],
+      "settings": {
+        "badge": "REAL RESULTS",
+        "heading": "Confidence Starts Here",
+        "subheading": "Reimagine What's Possible for Your Skin",
+        "stats_heading": "Not magic, just science.",
+        "image": "shopify://shop_images/4_e185a6eb-c938-48fd-8f48-89020d615a04.webp",
+        "disclaimer": "true",
+        "source": "Based on an independent study conducted in 2024 by CELYRA COSMETICS on 30 people after 30 days of use, using the CELYRA Pro Device. Results may vary.",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_bundle_offer": {
+      "type": "pd-bundle-offer",
+      "blocks": {
+        "product_item_y7F9q6": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/1_1_38f10505-3411-48a4-84f8-abb8bb88cbd9.webp",
+            "name": "Device",
+            "badge": "30% OFF",
+            "badge_style": "default"
+          }
+        },
+        "product_item_i9FKnk": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/8_745a4fbf-f7a0-4962-8036-6f55a4322bd0.webp",
+            "name": "Device",
+            "badge": "30% OFF",
+            "badge_style": "default"
+          }
+        },
+        "product_item_4gK9gG": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/11_d0bb619e-b618-49ac-9ab4-a7b1fdcf8bdc.webp",
+            "name": "Device",
+            "badge": "30% OFF",
+            "badge_style": "default"
+          }
+        },
+        "product_item_3gLbYp": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/5_af8fc286-e4cd-40ab-b56b-3157bb9caa16.webp",
+            "name": "Device",
+            "badge": "30% OFF",
+            "badge_style": "default"
+          }
+        },
+        "product_item_7Uc7Ld": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/4_e185a6eb-c938-48fd-8f48-89020d615a04.webp",
+            "name": "Device",
+            "badge": "30% OFF",
+            "badge_style": "default"
+          }
+        },
+        "product_item_G8cE3h": {
+          "type": "product_item",
+          "settings": {
+            "image": "shopify://shop_images/2_93d19630-cbd4-4111-9491-7411cc6fd06e.webp",
+            "name": "Device",
+            "badge": "30% OFF",
+            "badge_style": "default"
+          }
+        }
+      },
+      "block_order": [
+        "product_item_y7F9q6",
+        "product_item_i9FKnk",
+        "product_item_4gK9gG",
+        "product_item_3gLbYp",
+        "product_item_7Uc7Ld",
+        "product_item_G8cE3h"
+      ],
+      "settings": {
+        "banner_text": "ORDER TODAY TO GET 30% OFF + RECEIVE 3 FREE GIFTS!",
+        "countdown_hours": 14,
+        "countdown_minutes": 47,
+        "countdown_seconds": 35,
+        "offer_label": "Celebration Offer Expires",
+        "offer_date": "April 19th",
+        "promo_discount": "30% off",
+        "promo_code": "YOU30",
+        "button_label": "Add to Cart",
+        "button_link": "",
+        "guarantee_text": "60-day money back guarantee · Free shipping",
+        "padding_top": 0,
+        "padding_bottom": 60
+      }
+    },
+    "pd_faq": {
+      "type": "pd-faq",
+      "settings": {
+        "badge": "FAQ",
+        "title": "<p>Your questions, <em>answered</em></p>",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_specifications": {
+      "type": "pd-specifications",
+      "settings": {
+        "badge": "TECH SPECS",
+        "title": "Specifications",
+        "subtitle": "",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "pd_hero_banner": {
+      "type": "pd-hero-banner",
+      "settings": {
+        "image_position": "center center",
+        "height": 560,
+        "mobile_height": 360,
+        "full_width": true,
+        "border_radius": 0,
+        "overlay_opacity": 0,
+        "text_position": "center",
+        "heading": "",
+        "subtext": "",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
-  ,
-  "pd_before_after": {
-    "type": "pd-before-after-results",
-    "settings": {}
   },
-  "pd_clinic_comparison": {
-    "type": "pd-clinic-comparison",
-    "settings": {}
-  },
-  "pd_press_logos": {
-    "type": "pd-press-logos",
-    "settings": {}
-  },
-  "pd_how_to_use": {
-    "type": "pd-how-to-use",
-    "settings": {}
-  },
-  "pd_technology": {
-    "type": "pd-technology",
-    "settings": {}
-  },
-  "pd_customer_reviews": {
-    "type": "pd-customer-reviews",
-    "settings": {}
-  },
-  "pd_engineered_different": {
-    "type": "pd-engineered-different",
-    "settings": {}
-  },
-  "pd_stats_bar": {
-    "type": "pd-stats-bar",
-    "settings": {}
-  },
-  "pd_competitor_compare": {
-    "type": "pd-competitor-compare",
-    "settings": {}
-  },
-  "pd_expert_quote": {
-    "type": "pd-expert-quote",
-    "settings": {}
-  },
-  "pd_skin_memory": {
-    "type": "pd-skin-memory",
-    "settings": {}
-  },
-  "pd_research_backed": {
-    "type": "pd-research-backed",
-    "settings": {}
-  },
-  "pd_the_science": {
-    "type": "pd-the-science",
-    "settings": {}
-  },
-  "pd_trust_badges": {
-    "type": "pd-trust-badges",
-    "settings": {}
-  },
-  "pd_confidence_stats": {
-    "type": "pd-confidence-stats",
-    "settings": {}
-  },
-  "pd_bundle_offer": {
-    "type": "pd-bundle-offer",
-    "settings": {}
-  },
-  "pd_faq": {
-    "type": "pd-faq",
-    "settings": {}
-  },
-  "pd_hero_banner": {
-    "type": "pd-hero-banner",
-    "settings": {}
-  },
-  "pd_product_overview": {
-    "type": "pd-product-overview",
-    "settings": {}
-  },
-  "pd_guarantee": {
-    "type": "pd-guarantee",
-    "settings": {}
-  },
-  "pd_free_gifts": {
-    "type": "pd-free-gifts",
-    "settings": {}
-  },
-  "pd_faq_preview": {
-    "type": "pd-faq-preview",
-    "settings": {}
-  },
-  "pd_specifications": {
-    "type": "pd-specifications",
-    "settings": {}
-  }
-},
-"order": [
+  "order": [
     "main",
     "pd_product_overview",
     "pd_guarantee",
