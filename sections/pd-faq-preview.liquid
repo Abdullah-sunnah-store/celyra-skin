@@ -1,0 +1,91 @@
+<section class="pd-faqp section-{{ section.id }}-padding">
+  <div class="page-width pd-faqp__wrap">
+
+    <div class="pd-faqp__list">
+      {% for block in section.blocks %}
+        {% if block.type == 'qa' %}
+          <div class="pd-faqp__item" {{ block.shopify_attributes }}>
+            <button class="pd-faqp__q">
+              <span>{{ block.settings.question }}</span>
+              <span class="pd-faqp__icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+              </span>
+            </button>
+            <div class="pd-faqp__a">
+              <div class="pd-faqp__a-inner">{{ block.settings.answer }}</div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.view_all_label != blank and section.settings.view_all_link != blank %}
+      <div class="pd-faqp__footer">
+        <a href="{{ section.settings.view_all_link }}" class="pd-faqp__link">{{ section.settings.view_all_label }} →</a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<style>
+  .pd-faqp { background: #f9f7f5; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-faqp__wrap { max-width: 720px; margin: 0 auto; }
+  .pd-faqp__list { border-top: 1px solid #e0e0e0; }
+  .pd-faqp__item { border-bottom: 1px solid #e0e0e0; }
+  .pd-faqp__q { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 0; background: none; border: none; cursor: pointer; font-size: 16px; font-weight: 600; color: #1a1a1a; text-align: left; gap: 16px; }
+  .pd-faqp__icon { flex-shrink: 0; color: #888; transition: transform 0.25s; }
+  .pd-faqp__item.is-open .pd-faqp__icon { transform: rotate(45deg); }
+  .pd-faqp__a { display: none; }
+  .pd-faqp__item.is-open .pd-faqp__a { display: block; }
+  .pd-faqp__a-inner { padding: 0 0 20px; font-size: 15px; color: #555; line-height: 1.7; }
+  .pd-faqp__footer { text-align: center; padding-top: 24px; }
+  .pd-faqp__link { font-size: 14px; font-weight: 600; color: #3a7a6a; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+
+<script>
+document.querySelectorAll('.pd-faqp__q').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    btn.closest('.pd-faqp__item').classList.toggle('is-open');
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "PD - FAQ Preview",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "view_all_label", "label": "View All Link Label", "default": "View all FAQs" },
+    { "type": "url", "id": "view_all_link", "label": "View All Link URL" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 52 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 52 }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question & Answer",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "What does the device actually do?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>The device uses fractional 3D RF (Radio Frequency) energy to safely heat the dermis — the deeper layer of your skin where collagen and elastin live. This controlled thermal response triggers your skin's natural repair process, producing up to 288% more collagen over 3 months.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - FAQ Preview",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "What does the device actually do?", "answer": "<p>The device uses fractional 3D RF energy to safely heat the dermis — the deeper layer of your skin where collagen and elastin live. This triggers your skin's natural repair process, producing up to 288% more collagen over 3 months.</p>" } },
+        { "type": "qa", "settings": { "question": "How is this different from other RF devices?", "answer": "<p>Most home RF devices use flat electrodes and uniform heating. Ours uses 144 raised 3D platinum electrodes and multi-polar fractional technology — the same used in professional clinics — for precise, deeper stimulation with no hot spots.</p>" } },
+        { "type": "qa", "settings": { "question": "Will this cause facial fat loss?", "answer": "<p>No. Facial fat loss is caused by devices that send energy too deep, past the dermis. Our device is calibrated to stop at the dermis layer — so you get maximum collagen response with zero fat loss risk.</p>" } },
+        { "type": "qa", "settings": { "question": "When will I see results?", "answer": "<p>Most users notice smoother, firmer skin within 2–4 weeks. The most significant collagen remodelling results appear at 6–12 weeks with consistent use 3–5 times per week.</p>" } },
+        { "type": "qa", "settings": { "question": "What if I don't see results?", "answer": "<p>We offer a 60-day money-back guarantee. If you don't see visible results within 60 days of consistent use, contact us for a full refund — no questions asked. Less than 1% of customers ever request one.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

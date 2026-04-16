@@ -1,0 +1,86 @@
+<section class="pd-gifts section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-gifts__header">
+      <h2 class="pd-gifts__title">{{ section.settings.title }}</h2>
+      {% if section.settings.subtitle != blank %}
+        <p class="pd-gifts__sub">{{ section.settings.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div class="pd-gifts__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'gift' %}
+          <div class="pd-gifts__item" {{ block.shopify_attributes }}>
+            <div class="pd-gifts__img-wrap">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 300 }}" alt="{{ block.settings.name }}" loading="lazy" width="300" height="300">
+              {% else %}
+                {{ 'product-3' | placeholder_svg_tag: 'pd-gifts__placeholder' }}
+              {% endif %}
+              {% if block.settings.badge != blank %}
+                <span class="pd-gifts__badge">{{ block.settings.badge }}</span>
+              {% endif %}
+            </div>
+            <p class="pd-gifts__name">{{ block.settings.name }}</p>
+            {% if block.settings.value != blank %}
+              <p class="pd-gifts__value">{{ block.settings.value }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-gifts { background: #fff; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-gifts__header { text-align: center; margin-bottom: 36px; }
+  .pd-gifts__title { font-size: clamp(20px, 3vw, 32px); font-weight: 800; color: #1a1a1a; margin: 0 0 8px; }
+  .pd-gifts__sub { font-size: 15px; color: #666; margin: 0; }
+  .pd-gifts__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 800px; margin: 0 auto; }
+  .pd-gifts__item { text-align: center; }
+  .pd-gifts__img-wrap { position: relative; aspect-ratio: 1/1; background: #f5f8f9; border-radius: 14px; overflow: hidden; margin-bottom: 14px; }
+  .pd-gifts__img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 16px; }
+  .pd-gifts__placeholder { width: 100%; height: 100%; display: block; }
+  .pd-gifts__badge { position: absolute; top: 12px; left: 12px; background: #3a7a6a; color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+  .pd-gifts__name { font-size: 15px; font-weight: 700; color: #1a1a1a; margin: 0 0 4px; }
+  .pd-gifts__value { font-size: 13px; color: #3a7a6a; font-weight: 600; margin: 0; }
+  @media (max-width: 600px) { .pd-gifts__grid { grid-template-columns: 1fr; max-width: 300px; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Free Gifts",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "3 Free Gifts Included Worth $137!" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 52 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 52 }
+  ],
+  "blocks": [
+    {
+      "type": "gift",
+      "name": "Gift Item",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Gift Image" },
+        { "type": "text", "id": "name", "label": "Gift Name", "default": "Aqualis Serum" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "Free" },
+        { "type": "text", "id": "value", "label": "Value", "default": "Worth $59" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Free Gifts",
+      "blocks": [
+        { "type": "gift", "settings": { "name": "Aqualis Serum", "badge": "Free $59", "value": "Worth $59" } },
+        { "type": "gift", "settings": { "name": "Celyra Mask", "badge": "Free $49", "value": "Worth $49" } },
+        { "type": "gift", "settings": { "name": "Travel Pouch", "badge": "Free $29", "value": "Worth $29" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

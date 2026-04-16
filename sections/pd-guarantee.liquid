@@ -1,0 +1,80 @@
+<section class="pd-guar section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-guar__inner">
+
+      <div class="pd-guar__badge-col">
+        {% if section.settings.badge_image != blank %}
+          <img src="{{ section.settings.badge_image | image_url: width: 280 }}"
+               alt="Money-Back Guarantee" loading="lazy" width="280" height="280"
+               class="pd-guar__badge-img">
+        {% else %}
+          <div class="pd-guar__badge-placeholder">
+            <span class="pd-guar__badge-days">{{ section.settings.days | default: '60' }}</span>
+            <span class="pd-guar__badge-text">Day<br>Money-Back</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="pd-guar__content">
+        <h2 class="pd-guar__title">{{ section.settings.title }}</h2>
+        <p class="pd-guar__sub">{{ section.settings.subtitle }}</p>
+
+        <details class="pd-guar__details">
+          <summary class="pd-guar__summary">
+            <span>{{ section.settings.details_label | default: 'Read more' }}</span>
+            <span class="pd-guar__summary-icon">+</span>
+          </summary>
+          <div class="pd-guar__details-body">{{ section.settings.details_text }}</div>
+        </details>
+
+        {% if section.settings.stat_text != blank %}
+          <p class="pd-guar__stat">
+            <span class="pd-guar__stat-icon">🛡️</span>
+            {{ section.settings.stat_text }}
+          </p>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-guar { background: #f0f5f5; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-guar__inner { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; max-width: 800px; margin: 0 auto; }
+  .pd-guar__badge-img { width: 140px; height: 140px; object-fit: contain; display: block; }
+  .pd-guar__badge-placeholder { width: 140px; height: 140px; border-radius: 50%; background: #5a7a7a; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+  .pd-guar__badge-days { font-size: 36px; font-weight: 800; line-height: 1; }
+  .pd-guar__badge-text { font-size: 12px; text-align: center; line-height: 1.3; margin-top: 4px; }
+  .pd-guar__title { font-size: clamp(18px, 2.5vw, 28px); font-weight: 800; color: #1a1a1a; margin: 0 0 8px; }
+  .pd-guar__sub { font-size: 15px; color: #3a6a6a; font-weight: 600; margin: 0 0 16px; }
+  .pd-guar__details { border-top: 1px solid #c8dede; border-bottom: 1px solid #c8dede; padding: 12px 0; margin-bottom: 16px; }
+  .pd-guar__summary { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 14px; font-weight: 600; color: #1a1a1a; list-style: none; }
+  .pd-guar__summary::-webkit-details-marker { display: none; }
+  .pd-guar__summary-icon { font-size: 20px; color: #5a7a7a; transition: transform 0.2s; }
+  .pd-guar__details[open] .pd-guar__summary-icon { transform: rotate(45deg); }
+  .pd-guar__details-body { font-size: 14px; color: #555; line-height: 1.7; padding-top: 12px; }
+  .pd-guar__stat { font-size: 14px; color: #3a6a6a; margin: 0; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+  @media (max-width: 600px) { .pd-guar__inner { grid-template-columns: 1fr; justify-items: center; text-align: center; } .pd-guar__summary { text-align: left; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Guarantee",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "image_picker", "id": "badge_image", "label": "Guarantee Badge Image" },
+    { "type": "text", "id": "days", "label": "Days (shown in badge if no image)", "default": "60" },
+    { "type": "text", "id": "title", "label": "Title", "default": "60-Day Money-Back Guarantee" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Results By 60 Days Or Your Money Back" },
+    { "type": "text", "id": "details_label", "label": "Details Toggle Label", "default": "What does this mean?" },
+    { "type": "richtext", "id": "details_text", "label": "Details Text", "default": "<p>We stand behind the VEAUTY Dot 100%. If you don't see visible results within 60 days of consistent use, we'll give you a full refund — no questions asked. Simply contact our team and we'll process your return promptly.</p>" },
+    { "type": "text", "id": "stat_text", "label": "Trust Stat", "default": "Less than 1% of customers return their order" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 44 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 44 }
+  ],
+  "presets": [{ "name": "PD - Guarantee" }]
+}
+{% endschema %}

@@ -1,0 +1,98 @@
+<section class="pd-spec section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="pd-spec__inner">
+
+      <div class="pd-spec__header">
+        {% if section.settings.badge != blank %}
+          <span class="pd-spec__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+        <h2 class="pd-spec__title">{{ section.settings.title }}</h2>
+        {% if section.settings.subtitle != blank %}
+          <p class="pd-spec__sub">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+
+      <div class="pd-spec__table-wrap">
+        <table class="pd-spec__table">
+          <tbody>
+            {% for block in section.blocks %}
+              {% if block.type == 'spec_row' %}
+                <tr class="pd-spec__row" {{ block.shopify_attributes }}>
+                  <td class="pd-spec__label">{{ block.settings.label }}</td>
+                  <td class="pd-spec__value">{{ block.settings.value }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .pd-spec { background: #f5f8f9; }
+  .section-{{ section.id }}-padding { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  .pd-spec__inner { max-width: 720px; margin: 0 auto; }
+  .pd-spec__header { text-align: center; margin-bottom: 36px; }
+  .pd-spec__badge { display: inline-block; border: 1px solid #aaa; border-radius: 100px; padding: 4px 14px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #666; margin-bottom: 12px; }
+  .pd-spec__title { font-size: clamp(22px, 3vw, 34px); font-weight: 800; color: #1a1a1a; margin: 0 0 8px; }
+  .pd-spec__sub { font-size: 14px; color: #666; margin: 0; }
+  .pd-spec__table-wrap { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #e0e8ea; }
+  .pd-spec__table { width: 100%; border-collapse: collapse; }
+  .pd-spec__row { border-bottom: 1px solid #eef2f3; }
+  .pd-spec__row:last-child { border-bottom: none; }
+  .pd-spec__row:nth-child(even) { background: #f9fbfc; }
+  .pd-spec__label { padding: 14px 20px; font-size: 14px; font-weight: 600; color: #444; width: 45%; }
+  .pd-spec__value { padding: 14px 20px; font-size: 14px; color: #1a1a1a; }
+  @media (max-width: 500px) { .pd-spec__label, .pd-spec__value { padding: 12px 14px; font-size: 13px; } }
+</style>
+
+{% schema %}
+{
+  "name": "PD - Specifications",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge", "label": "Badge", "default": "TECH SPECS" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Specifications" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "spec_row",
+      "name": "Spec Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Spec Label", "default": "Electrodes" },
+        { "type": "text", "id": "value", "label": "Spec Value", "default": "144 Platinum 3D Raised Electrodes" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PD - Specifications",
+      "blocks": [
+        { "type": "spec_row", "settings": { "label": "Electrodes", "value": "144 Platinum 3D Raised Electrodes" } },
+        { "type": "spec_row", "settings": { "label": "Frequency", "value": "1.5 MHz Radio Frequency" } },
+        { "type": "spec_row", "settings": { "label": "Technology", "value": "3D Multi-Polar Fractional RF" } },
+        { "type": "spec_row", "settings": { "label": "Treatment Heads", "value": "Replaceable Fractional Heads Included" } },
+        { "type": "spec_row", "settings": { "label": "Input Voltage", "value": "100–240V AC, 50/60Hz" } },
+        { "type": "spec_row", "settings": { "label": "Output Power", "value": "5W" } },
+        { "type": "spec_row", "settings": { "label": "Treatment Time", "value": "15 minutes per session" } },
+        { "type": "spec_row", "settings": { "label": "Session Frequency", "value": "3–5x per week (maintenance: 1–2x per week)" } },
+        { "type": "spec_row", "settings": { "label": "Device Size", "value": "170mm × 50mm × 45mm" } },
+        { "type": "spec_row", "settings": { "label": "Device Weight", "value": "210g" } },
+        { "type": "spec_row", "settings": { "label": "Electrode Material", "value": "Platinum-coated stainless steel" } },
+        { "type": "spec_row", "settings": { "label": "Housing Material", "value": "Medical-grade ABS plastic" } },
+        { "type": "spec_row", "settings": { "label": "Certifications", "value": "CE, FCC, RoHS Certified" } },
+        { "type": "spec_row", "settings": { "label": "Warranty", "value": "1 Year Manufacturer Warranty" } },
+        { "type": "spec_row", "settings": { "label": "Suitable Skin Types", "value": "All skin types" } },
+        { "type": "spec_row", "settings": { "label": "Country of Manufacture", "value": "South Korea" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

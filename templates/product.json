@@ -741,10 +741,34 @@
   "pd_hero_banner": {
     "type": "pd-hero-banner",
     "settings": {}
+  },
+  "pd_product_overview": {
+    "type": "pd-product-overview",
+    "settings": {}
+  },
+  "pd_guarantee": {
+    "type": "pd-guarantee",
+    "settings": {}
+  },
+  "pd_free_gifts": {
+    "type": "pd-free-gifts",
+    "settings": {}
+  },
+  "pd_faq_preview": {
+    "type": "pd-faq-preview",
+    "settings": {}
+  },
+  "pd_specifications": {
+    "type": "pd-specifications",
+    "settings": {}
   }
 },
 "order": [
     "main",
+    "pd_product_overview",
+    "pd_guarantee",
+    "pd_free_gifts",
+    "pd_faq_preview",
     "pd_before_after",
     "pd_clinic_comparison",
     "pd_press_logos",
@@ -762,9 +786,7 @@
     "pd_confidence_stats",
     "pd_bundle_offer",
     "pd_faq",
-    "pd_hero_banner",
-    "product-recommendations",
-    "comparison_table_6r6gHe",
-    "product_tabs_taf7tb"
+    "pd_specifications",
+    "pd_hero_banner"
   ]
 }
