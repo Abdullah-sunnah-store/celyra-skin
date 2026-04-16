@@ -59,7 +59,7 @@
                 {% for row in feature_blocks %}
                   <div class="pd-comp__row pd-comp__row--bad">
                     <span class="pd-comp__x-icon">✕</span>
-                    <span class="pd-comp__row-text">{{ row.settings.competitor_values | split: "|" | [forloop.index0] | default: row.settings.competitor_value }}</span>
+                    <span class="pd-comp__row-text">{{ row.settings.competitor_value }}</span>
                   </div>
                 {% endfor %}
               </div>

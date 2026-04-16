@@ -669,7 +669,7 @@
         "button_text_hover_dark": "rgba(0,0,0,0)"
       }
     }
-  },
+  ,
   "pd_before_after": {
     "type": "pd-before-after-results",
     "settings": {}
@@ -741,8 +741,9 @@
   "pd_hero_banner": {
     "type": "pd-hero-banner",
     "settings": {}
-  },
-  "order": [
+  }
+},
+"order": [
     "main",
     "pd_before_after",
     "pd_clinic_comparison",
